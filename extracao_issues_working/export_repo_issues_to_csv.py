@@ -9,7 +9,7 @@ import requests
 
 
 GITHUB_USER = 'wbrum'
-GITHUB_PASSWORD = 'p1mp@p1mp'
+GITHUB_PASSWORD = 'TSIrkBq0XvNH5fvuIz3L'
 REPO = 'gems-uff/noworkflow'  # format is username/repo
 ISSUES_FOR_REPO_URL = 'https://api.github.com/repos/%s/issues' % REPO
 AUTH = (GITHUB_USER, GITHUB_PASSWORD)
