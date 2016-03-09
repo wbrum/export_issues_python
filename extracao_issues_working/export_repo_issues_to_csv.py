@@ -31,18 +31,6 @@ csvout = csv.writer(open(csvfile, 'wb'))
 csvout.writerow(('id', 'Title', 'Body', 'State', 'Created At', 'Updated At', 'Labels', 'User'))
 write_issues(r)
 
-# more pages? examine the 'link' header returned
-# if 'link' in r.headers:
-    # pages = dict(
-        # [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in
-            # [link.split(';') for link in
-                # r.headers['link'].split(',')]])
-    # while 'last' in pages and 'next' in pages:
-        # r = requests.get(pages['next'], auth=AUTH)
-        # write_issues(r)
-        # if pages['next'] == pages['last']:
-            # break
-#more pages? examine the 'link' header returned
 if 'link' in r.headers:
     pages = dict(
         [(rel[6:-1], url[url.index('<')+1:-1]) for url, rel in
