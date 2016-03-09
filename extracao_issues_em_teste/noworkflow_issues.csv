@@ -1,0 +1,251 @@
+issue_no,title,body,labels,user
+100,Add option show only data or functions in dataflow command,,enhancement,JoaoFelipe
+99,Pack the content DB,"We are currently using a basic mechanism for storing content of files, as described here (http://schacon.github.io/gitbook/7_how_git_stores_objects.html). This is nice because we do not duplicate content in the database, but after any small change in the file the entire new content is stored. An alternative is to adopt some strategy to pack the content, like this (http://schacon.github.io/gitbook/7_the_packfile.html).",enhancement,leomurta
+98,Combine Augmented Assign nodes,"Example:
+```python
+x = f1()
+x += 1
+f2(x)
+```
+Currently results in 
+![output](https://cloud.githubusercontent.com/assets/327789/13380248/faa57012-de1c-11e5-8e92-d5c5cb72a2cb.png)
+
+We should have a option to combine both ""x"" nodes
+
+",enhancement,JoaoFelipe
+97,Add option to combine variables and file accesses in dataflow,,enhancement,JoaoFelipe
+96,"Hide ""internal use"" functions in dataflow graph","According to PEP 8, ""internal use"" functions can be identified by leading underscores:
+",enhancement,JoaoFelipe
+95,Prospective dataflow graph,,enhancement,JoaoFelipe
+84,Reimplement Program Slicing,"The current approach is really hard to maintain. It requires to capture definition provenance from ast and bytecode and match it to tracing events during execution. 
+However Python does not create tracing events for everything on the bytecode. Sometimes it is even a bit inconsistent:
+- the CALL_FUNCTION opcode does not generate a 'call' event for builtins functions, such as 'int', 'float', but it generates 'call' event for other builtins and user defined calls: ""min"", ""sorted""...
+- some opcodes generate 'call' events only on Python 2, while others generate 'call' events only on Python 3.
+
+We could reimplement it by tracing only the bytecode, since it contains enough information connect to the source code: the bytecode preserves all names and lines.
+There is an old hack to support bytecode tracing on Python: http://nedbatchelder.com/blog/200804/wicked_hack_python_bytecode_tracing.html
+
+
+",enhancement,JoaoFelipe
+83,Visualizing file content,"We currently store the content of all files created and modified during a trial. It would be nice to allow users to click in one function and see all created and modified files. Moreover, in the case of the modified files, we could run a diff against its previous version and show the change itself.
+
+Basically, the idea is similar to what SourceTree does: different panels, one with the list of files and the other with the diff content of the file, but instead of having commits we would have functions to navigate. ",enhancement,leomurta
+77,Collect exceptions,"Exceptions should be registered and associated with the activations that raised them and activations that catched them. 
+We could use them to create extra edges on the activation graph",enhancement,JoaoFelipe
+76,Collect processor load,"From time to time, we could collect processor load",enhancement,JoaoFelipe
+75,Support Unpack Generalizations on slicing,"Python 3.5 genarilized unpacking to support more than one on function calls:
+```python
+def f(i, j, k, l, **kwargs):
+    pass
+a = [1, 2]
+b = [3, 4]
+c = {'x': 5}
+d = {'y': 6}
+
+f(*a, *b, **c, **d)
+```
+We should create dependencies:
+i -> a
+j -> a
+k -> b
+l -> b
+kwargs -> c, d
+",bug,JoaoFelipe
+74,Capture Definition Provenance from other files and class definitions,"Add an option to collect definition provenance from other modules other than the main script. 
+
+Currently, we capture only the content hash of the main script as definition provenance. The other local modules are captured as deployment provenance. So, we do not capture definition provenance from them that are useful for execution provenance (such as global variables names)
+
+We could expand FunctionDef table to not only store function definitions, but also classes and files, since they have the same attributes: trial_id, id, name, code_hash.
+We could also add an extra attribute: parent.
+This way, the following code would generate 4 definition objects
+```python
+# some_file.py
+class SomeClass(object):
+    def some_method(self):
+        def some_function():
+            pass
+```
+
+An extra attribute, qualname, could be provided for qualified name reference, according to https://www.python.org/dev/peps/pep-3155/ 
+
+Definition objects:
+```
+Definition(id=1, name=""some_file.py"", parent=None, qualname="""")
+Definition(id=2, name=""SomeClass"", parent=1, qualname=""SomeClass"")
+Definition(id=3, name=""some_method"", parent=2, qualname=""SomeClass.some_method"")
+Definition(id=4, name=""some_function"", parent=3, qualname=""SomeClass.some_method.<local>.some_function"")
+```
+
+Note that the qualname is not fully qualified, so we don't have the filename on it.
+
+ ",enhancement,JoaoFelipe
+73,Export more data to Prolog,"Currently, noWorkflow exports only Trial(id), Activation, FileAccess, SlicingVariable, SlicingUsage, and SlicingDependency.
+
+It could export other data as well, including other basic Trial information, and other tables",enhancement,JoaoFelipe
+69,Improve activation graphs,"1- The current summarizing hides the actual sequence of activations in an activation graph.
+It would be good to be able to visualize it better. Using boxes for activations might help in this issue.
+
+
+2- On diff graphs, red and green have two different semantics: time and diff (add/remove). It might confuse users. It would be better to have a different representation for diffs.
+
+
+3- Having two colors on nodes is also confusing. A single color could be used with an scale from red to white to green where red indicates ""trial 1 is faster than trial 2""; green indicates the opposite; and white indicates that neither are faster.
+
+It would be nice to have an uniform metaphor for (2) and (3). 
+Another possibility is to have an option to switch the visualization perspective: if it is _time_, do not show node diff. It it is _structure_, do not show time. This would make the color semantics more stable.",enhancement,JoaoFelipe
+68,Use noWorkflow for education,"The provenance captured by noWorkflow could be used for education.
+
+Since it helps understanding what happened during the execution of a script, it is possible to use noWorkflow for teaching and learning Python. With this purpose, it would be nice to have better activation graphs, showing parameters, returns and all activations explicitly (i.e. without summarizations). 
+I worked on something in this direction with @henriquebastos, but we used Python decorators to collect calls, instead of noWorkflow: https://gist.github.com/henriquebastos/a28ef88f12d98a410df9 
+
+There are other possible uses for noWorkflow in education. It could be used for homework answer checking and validation. Instead of submitting the final script as an answer to a homework assignment, a student could submit the provenance of a trial, captured by noWorkflow. Then, the professor could use it to:
+- check if there was no cheating, by looking at the environment properties, comparing provenance graphs and files between students;
+- check if the script actually works, by looking at the used modules, and verifying if the provenance graph makes sense.
+
+The student could also use the provenance as a ""proof"" that the script worked on her machine.
+ 
+A third use case for noWorkflow in education could be asking help. It could be possible to publish a provenance page in a website. When a person wanted to ask ""X is not working as expected, what is the reason?"" (in sites such stackoverflow, or class groups), instead of just asking and presenting the code, she could send the provenance page link to give more context.
+",enhancement,JoaoFelipe
+66,Incomplete function definition and activations names,"#20 added the possibility to parse the AST of all python files in the package
+
+Now, it is possible to have the same function name, in the same line, but in two different files, with no reference to the file
+
+To solve this issue, either use a fully qualified name, or store the file for every function definition / activation name",bug,JoaoFelipe
+64,"""On line"" monitoring",Allow users to visualize and query provenance while the trial is still being executed,enhancement,JoaoFelipe
+62,Support Threads,There are some discussion about it on #30 ,enhancement,JoaoFelipe
+60,Program slicing of GenExpr,"Program slicing is not capturing GenExpr dependencies properly.
+
+Check the following code:
+```python
+def double(x):
+    return 2*x
+
+def other_scope(gen):
+    cond = 4
+    for i in gen:
+        print(i)
+
+cond = 2
+lis = [1, 2, 3]
+gen1 = (double(x) for x in lis)
+gen2 = (double(double(x)) for x in lis)
+gen3 = (x for x in lis if x > cond)
+
+for j in gen1:
+     print(j)
+outer_scope(gen2)
+outer_scope(gen3)
+```",bug,JoaoFelipe
+54,Select what does it capture,"Curently, it is possible to capture execution provenance at two granularities:
+- Coarse-grained granularity (Profiler): function activations, parameters, globals, files
+- Fine-grained granularity (Tracer): (Profiler) + variables values and dependencies between variables
+
+It would be nice to have more freedom in selecting what to capture:
+- I want to capture function activations using the Profiler, but skip capturing the files, since they can be too big
+- I want to capture variable dependencies using the Tracer for program slicing, but skip capturing everthing else",enhancement,JoaoFelipe
+53,Web example of IPython Notebook,"Include an example of the IPython notebook on the Web (in a server) so people can play with it.
+
+Maybe host now vis too",,JoaoFelipe
+52, Integrate noWorkflow and ReproZip,"ReproZip could have provenance analysis like noWorkflow; also, noWorkflow can use the provenance captured by ReproZip to improve its analysis. Many of the applied math examples use Python + Fortran: in fact, many of the file operations happen in the Fortran side. When combining both tools, even the non-Python operations could be detected and integrated.",enhancement,JoaoFelipe
+51,Diff for function activations,Compare activations parameters and returns between trials,enhancement,JoaoFelipe
+39,Python Omniscient Debugger,"Python Omniscient Debugger: https://github.com/rodsenra/pode
+
+They capture variables and events in a similar way that we do for program slicing (using python tracer). 
+The main difference is that they don't capture the dependencies. They capture only the values after the assignments.
+Another difference is that while we look at the AST, they look at the disasm to extract assingments, which is probably easier. Maybe we can explore it in the future since we already look at the disasm to extract the position of function calls.
+
+There is a hangout in portuguese explaining the code: https://www.youtube.com/watch?v=MxzZXBI5T1s
+",related work,JoaoFelipe
+38,Dynamic Slicing of python programs,http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=6899220&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6899220,related work,JoaoFelipe
+35,Complex data slicing,"The current program slicing does not handle complex data such as lists, dicts and objects very well.
+ToDo: 
+- Consider __getitem__: a[b]
+- Consider __getattr__: a.b
+- Treat parameters and assignments of variables that are references. 
+
+Current issues:
+```python
+def fn(x, y, z, w):
+    x.attr = y 
+
+o = SomeObject()
+a, b, c = 1, 2, 3
+o[a] = b 
+v = o
+v[a] = c 
+
+fn(o, a, b, c)
+```
+
+With the line ""v[a] = c"", both ""o[a]"" and ""v[a]"" should depend on ""c"". 
+With the line ""x.attr = y"", both ""x.attr"", ""v.attr"" and ""o.attr"" should depend on ""y"".
+How to deal with these situations?
+
+There are some discussion regarding this issue in #19 ",enhancement,JoaoFelipe
+33,Semantic Versioning for Trial,"I liked the idea proposed to Vitor to use a trial id using the format MAJOR.MINOR.PATCH, and I think it can be applied here
+
+Meaning:
+MAJOR: code version
+MINOR: params version
+PATCH: execution number
+
+For example, let`s say I have the following script
+```python
+# script.py
+import sys
+print sys.argv
+```
+If I execute `now run script.py 1`, it should generate the trial id 0.0.0 (or maybe another starting number) 
+If I execute the exactly same command again, it generate the trial id 0.0.1 and so on
+
+If I change the params and execute `now run script.py 2`, it should generate the trial id 0.1.0
+If I change the params again and execute `now run script.py 3`, it should generate the trial id 0.2.0
+
+If I decide to change the code:
+```python
+# script.py
+import sys
+print sys.argv[1]
+```
+And execute it again `now run script.py 1`, the new version should be 1.0.0
+
+----
+
+Questions:
+1- Is it natural to have a Trial 0.0.0? Or it is better to start with 1.1.1? Or even 0.0.1?
+2- Are the params independent from the code version? In the previous example, after changing the code, if I run `now run script.py 3`, should it generate the trial id 1.2.0 (knowing that the param '3' was used in 0.2.0) or generate the trial id 1.1.0, because the last MINOR was 0?
+
+
+
+",enhancement,JoaoFelipe
+24,Investigate techniques for summarizing and visualizing provenance graphs,"Also analyze different ways to contrast different trials.
+
+Related work regarding trace diff: http://www.bibbase.org/network/publication/missier-woodman-hiden-watson-provenanceanddatadifferencingforworkflowreproducibilityanalysis-2013",enhancement related work,JoaoFelipe
+23,Integrate provenance at different levels,E.g.: Integrate operating system level with function level,enhancement,JoaoFelipe
+20,Configure granularity of capture,"Possible configurations
+- Capture all variables being used
+- Capture provenance at user-defined function level (default)
+- Capture provenance at deeper function levels",enhancement,JoaoFelipe
+13,Strong Links,http://dl.acm.org/citation.cfm?id=1876071,related work,braganholo
+12,Sample pipelines in Python: Rosalind,http://rosalind.info/problems/locations/,,braganholo
+11,Python prov,"A suites of Python modules for encoding, tracking, and storing provenance assertions",Library,braganholo
+10,Git in Python,http://pythonhosted.org/GitPython/0.3.1/index.html,Library,braganholo
+9,Wanted: An Entry-Level Provenance Library,http://software-carpentry.org/blog/2012/10/wanted-an-entry-level-provenance-library.html,Library,braganholo
+8,Provenance,http://software-carpentry.org/v4/essays/provenance.html,Library related work,braganholo
+7,Pyprov 1.0.1: A Python implementation of PROV data model,https://pypi.python.org/pypi/pyprov/1.0.1,Library related work,braganholo
+6,Data Provenance with GitPython,http://penandpants.com/2013/04/25/data-provenance-with-gitpython/,related work,braganholo
+5,A Python Library for Provenance Recording and Querying,http://link.springer.com/chapter/10.1007%2F978-3-540-89965-5_24,related work,braganholo
+4,ReStore: Reusing Results of MapReduce Jobs,"Proceedings of the VLDB Endowment (PVLDB), volume 5, number 6, pages 586-597, February 2012
+https://cs.uwaterloo.ca/~ashraf/pubs/pvldb12restore.pdf
+
+SIGMOD DEMO:
+https://cs.uwaterloo.ca/~ashraf/pubs/sigmod12restoredemo.pdf",related work,braganholo
+3,Sumatra,"Paper: Automated capture of experiment context for easier reproducibility in computational research
+http://andrewdavison.info/media/files/reproducible_research_CiSE.pdf
+
+Implementation: https://pypi.python.org/pypi/Sumatra
+
+Slides: http://icerm.brown.edu/materials/Slides/tw-12-5/Sumatra:_a_toolkit_for_provenance_capture_and_reuse_%5D_Andrew_Davison,_Centre_National_de_la_Recherche_Scientifique_(CNRS).pdf",related work,braganholo
+2,A Universal Identifier for Computational Results,"Stanford work
+http://www.sciencedirect.com/science/article/pii/S1877050911001256",related work,braganholo
+1,Find a Python database to store the hashes and execution results,,,braganholo
