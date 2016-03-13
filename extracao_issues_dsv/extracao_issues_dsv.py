@@ -1,11 +1,10 @@
 import csv
 import github3
 
-# configurações de api para o github
 git_username = 'wbrum'
-git_api_token = 'd3f89dd7214b90ac3718a013bcd574f9864c75b9'
+git_api_token = 'dde42796ee120eef93b50371b15df243d237d8d6'
 git_repo = 'https://github.com/gems-uff/noworkflow'
-state = 'open' # 'open','closed' ou 'all'
+state = 'all' # 'open','closed' ou 'all'
 
 # csv name
 csv_name = "git_hub_issues.csv"
@@ -28,16 +27,17 @@ def run_csv():
         'created_at',
         'updated_at',
         'closed_at',
+		'assignee',
     ]
 
     # escreve header rows
     output_csv.writerow(headers)
 
     # pega issues e transcreve para csv
-    git_issues = github.iter_repo_issues('gems-uff','noworkflow','*')
+    git_issues = github.iter_repo_issues('gems-uff','noworkflow','',state)
     for git_issue in git_issues:
         print git_issue.title
-        labels = ' '.join(git_issue.labels) #problema aqui
+     #   labels = ' '.join(git_issue.labels.color) #problema aqui
 
         # alot of these are blank because they are not really 
         # needed but if you need them just fill them out
@@ -48,10 +48,11 @@ def run_csv():
             git_issue.body.encode('utf8'),
             git_issue.state, 
             git_issue.user, 
-            labels,
+            git_issue.labels,
             git_issue.created_at,
             git_issue.updated_at,
             git_issue.closed_at,
+			git_issue.assignee,
         ]
         output_csv.writerow(issue)
 

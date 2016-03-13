@@ -1,1 +1,1077 @@
-id,title,body,state,creator,labels,created_at,updated_at,closed_at
+id,title,body,state,creator,labels,created_at,updated_at,closed_at,assignee
+100,Add option show only data or functions in dataflow command,,open,JoaoFelipe,[enhancement],2016-02-29 16:46:24+00:00,2016-03-01 04:37:11+00:00,,
+99,Pack the content DB,"We are currently using a basic mechanism for storing content of files, as described here (http://schacon.github.io/gitbook/7_how_git_stores_objects.html). This is nice because we do not duplicate content in the database, but after any small change in the file the entire new content is stored. An alternative is to adopt some strategy to pack the content, like this (http://schacon.github.io/gitbook/7_the_packfile.html).",open,leomurta,[enhancement],2016-02-28 22:04:52+00:00,2016-02-29 14:34:37+00:00,,JoaoFelipe
+98,Combine Augmented Assign nodes,"Example:
+```python
+x = f1()
+x += 1
+f2(x)
+```
+Currently results in 
+![output](https://cloud.githubusercontent.com/assets/327789/13380248/faa57012-de1c-11e5-8e92-d5c5cb72a2cb.png)
+
+We should have a option to combine both ""x"" nodes
+
+",open,JoaoFelipe,[enhancement],2016-02-28 16:13:43+00:00,2016-02-28 16:13:43+00:00,,
+97,Add option to combine variables and file accesses in dataflow,,open,JoaoFelipe,[enhancement],2016-02-28 05:37:48+00:00,2016-02-28 16:11:01+00:00,,
+96,"Hide ""internal use"" functions in dataflow graph","According to PEP 8, ""internal use"" functions can be identified by leading underscores:
+",open,JoaoFelipe,[enhancement],2016-02-28 05:36:01+00:00,2016-02-28 05:36:49+00:00,,
+95,Prospective dataflow graph,,open,JoaoFelipe,[enhancement],2016-02-26 20:09:43+00:00,2016-02-26 20:09:43+00:00,,
+94,Collection of loop and conditional dependencies,"Two bugs:
+1- Updates to variable names create wrong dependencies:
+
+```python
+condition = True
+while condition:
+    condition = False
+    var = 2
+```
+In this case, noWorkflow creates a conditional dependency for ""var"" to ""condition"" defined in line 3.
+The same thing occurs if we change the iterable in for loops
+
+2- For loops create invalid ""iterator"" variables
+```python
+_list = [1]
+for i in _list:
+    pass
+```
+noWorkflow says that ""i"" depends on ""iterator _list"", that depends on ""_list""
+It should be ""i"" depends on ""_list""
+ ",closed,JoaoFelipe,[bug],2016-02-26 01:49:05+00:00,2016-02-26 20:07:01+00:00,2016-02-26 20:07:01+00:00,
+93,Hide unnecessary nodes in dependency graph,,closed,JoaoFelipe,[bug],2016-02-26 01:34:20+00:00,2016-02-26 01:38:45+00:00,2016-02-26 01:38:45+00:00,
+92,Slicing command should be called Tracker instead of Tracer,"Since we have a more complete issue for dealing with commands #54, the only purpose of this issue is a temporary rename from -e Tracer to -e Tracker
+
+It is probably better to create an alias for -e Tracer, as it appears in the videos. ",closed,JoaoFelipe,[bug],2016-02-23 13:32:46+00:00,2016-02-26 20:53:22+00:00,2016-02-26 20:53:22+00:00,
+91,Store the dependency type,Store in the SlicingDependency their types.,closed,leomurta,[enhancement],2016-02-22 21:00:55+00:00,2016-02-26 01:38:18+00:00,2016-02-26 01:38:18+00:00,JoaoFelipe
+90,Store the variable types,Store in SlicingVariable their types. ,closed,leomurta,[enhancement],2016-02-22 21:00:04+00:00,2016-02-26 01:38:34+00:00,2016-02-26 01:38:34+00:00,JoaoFelipe
+89,Adjust node names in the graph,"Use the name of the imported script instead of _handle_fromlist.
+Moreover, when the main script has the same name during diff, use the script name instead of <main>.",closed,leomurta,[bug],2016-02-16 10:21:49+00:00,2016-02-26 21:20:01+00:00,2016-02-26 21:20:01+00:00,JoaoFelipe
+88,Create backup trials only when there is change (on any file),"If there is change on any file (not only main script) since last trial and the user runs ""restore"", create a backup trial containing all the changed (and not changed) files, allowing a correct restore if necessary.",closed,leomurta,[enhancement],2016-02-16 09:56:41+00:00,2016-02-27 07:11:21+00:00,2016-02-27 07:11:21+00:00,JoaoFelipe
+87,Allow restoring specific file object versions,"Allow to restore specific file object version. Users should inform which object they want to restore individually and in which moment (i.e., by indicating a timestamp or the file content hash code).",closed,leomurta,[enhancement],2016-02-16 09:12:42+00:00,2016-02-28 00:09:09+00:00,2016-02-28 00:09:09+00:00,JoaoFelipe
+86,Configure Depth for Program Slicing,Depth configuration is not working on program slicing,closed,JoaoFelipe,[bug],2016-02-12 16:15:55+00:00,2016-02-26 20:07:31+00:00,2016-02-26 20:07:31+00:00,
+85,Export .dot files with variable dependency,,closed,JoaoFelipe,[enhancement],2016-02-11 02:45:58+00:00,2016-02-11 07:21:06+00:00,2016-02-11 07:21:06+00:00,
+84,Reimplement Program Slicing,"The current approach is really hard to maintain. It requires to capture definition provenance from ast and bytecode and match it to tracing events during execution. 
+However Python does not create tracing events for everything on the bytecode. Sometimes it is even a bit inconsistent:
+- the CALL_FUNCTION opcode does not generate a 'call' event for builtins functions, such as 'int', 'float', but it generates 'call' event for other builtins and user defined calls: ""min"", ""sorted""...
+- some opcodes generate 'call' events only on Python 2, while others generate 'call' events only on Python 3.
+
+We could reimplement it by tracing only the bytecode, since it contains enough information connect to the source code: the bytecode preserves all names and lines.
+There is an old hack to support bytecode tracing on Python: http://nedbatchelder.com/blog/200804/wicked_hack_python_bytecode_tracing.html
+
+
+",open,JoaoFelipe,[enhancement],2016-02-06 07:54:44+00:00,2016-02-25 03:34:09+00:00,,
+83,Visualizing file content,"We currently store the content of all files created and modified during a trial. It would be nice to allow users to click in one function and see all created and modified files. Moreover, in the case of the modified files, we could run a diff against its previous version and show the change itself.
+
+Basically, the idea is similar to what SourceTree does: different panels, one with the list of files and the other with the diff content of the file, but instead of having commits we would have functions to navigate. ",open,leomurta,[enhancement],2016-02-05 20:35:41+00:00,2016-02-05 20:35:41+00:00,,
+82,Improve runs with wrong parameters,"When I run now with wrong parameters, I usually get an exception instead of a error message with the usage example. 
+
+As an example, if I forget to inform the trial id when using export, it gives me an error: 
+
+Ramster:simulate_data_collection vanessa$ now export 
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/bin/now"", line 11, in <module>
+    sys.exit(main())
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/cmd/__init__.py"", line 42, in main
+    args.func(args)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/cmd/cmd_export.py"", line 148, in execute
+    args.trial = export_type(args.trial)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/cmd/cmd_export.py"", line 22, in export_type
+    if 'diff:' in string:
+TypeError: argument of type 'NoneType' is not iterable",closed,braganholo,[bug],2016-02-05 20:23:01+00:00,2016-02-06 07:09:44+00:00,2016-02-06 07:09:44+00:00,
+81,Help needs to be improved,"When I run ""now run -h"", the help options are not clear enough wrt the -e option. There is not clue of the difference between Profiler, Tracer and InspectProfiler. ",closed,braganholo,[enhancement],2016-02-05 20:21:10+00:00,2016-02-26 21:31:35+00:00,2016-02-06 07:09:51+00:00,
+80,Error while using Tracer,"I tried to execute noWorkflow with Tracer, and got an error. It runs with no error if I don't use the Tracer (now run simulate_data_collection.py)
+
+Ramster:simulate_data_collection vanessa$ now run -e Tracer simulate_data_collection.py
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 149, in trace_call
+    self.argument_captor.capture(frame, activation)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/argument_captors.py"", line 212, in capture
+    act_arg = order[j]
+IndexError: list index out of range
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 149, in trace_call
+    self.argument_captor.capture(frame, activation)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/argument_captors.py"", line 212, in capture
+    act_arg = order[j]
+IndexError: list index out of range
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 145, in trace_call
+    self.activation_stack[-1]
+IndexError: list index out of range
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 145, in trace_call
+    self.activation_stack[-1]
+IndexError: list index out of range
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 182, in trace_return
+    self.close_activation(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 288, in close_activation
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 145, in trace_call
+    self.activation_stack[-1]
+IndexError: list index out of range
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 382, in trace_line
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 182, in trace_return
+    self.close_activation(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 288, in close_activation
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 182, in trace_return
+    self.close_activation(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 288, in close_activation
+Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 201, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 53, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 182, in trace_return
+    self.close_activation(frame, event, arg)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/slicing.py"", line 288, in close_activation
+list index out of range
+[now] the execution finished with an uncaught exception. Traceback (most recent call last):
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/__init__.py"", line 54, in collect_provenance
+    exec(metascript.compiled, metascript.namespace)
+  File ""/Users/vanessa/workspace/yw-prototypes/src/main/resources/examples/simulate_data_collection/simulate_data_collection.py"", line 273, in <module>
+    simulate_data_collection(cassette_id, sample_score_cutoff)
+  File ""/Users/vanessa/workspace/yw-prototypes/src/main/resources/examples/simulate_data_collection/simulate_data_collection.py"", line 34, in simulate_data_collection
+    with run_logger(log_file_name=""run/run_log.txt"") as run_log:
+  File ""/Users/vanessa/workspace/yw-prototypes/src/main/resources/examples/simulate_data_collection/simulate_data_collection.py"", line 227, in __init__
+    self.log_file = open(log_file_name, 'wt') if log_file_name is not None else None
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/base.py"", line 101, in open
+    self.add_file_access(file_access)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 88, in add_file_access
+    activation = self._current_activation(ignore_open=True)
+  File ""/Users/vanessa/Library/Enthought/Canopy_64bit/User/lib/python2.7/site-packages/noworkflow/now/prov_execution/profiler.py"", line 78, in _current_activation
+    if astack[-1] is not None:
+IndexError: list index out of range",closed,braganholo,[bug],2016-02-05 20:19:13+00:00,2016-02-06 20:52:05+00:00,2016-02-06 20:46:27+00:00,
+79,Cannot run noWorkflow,"I upgraded my noWorkflow with
+
+`pip install --upgrade no workflow[all]`
+
+But it does not run:
+
+iMac-de-Leonardo:~ leomurta$ now
+Traceback (most recent call last):
+  File ""/Library/Frameworks/Python.framework/Versions/3.4/bin/now"", line 11, in <module>
+    sys.exit(main())
+  File ""/Library/Frameworks/Python.framework/Versions/3.4/lib/python3.4/site-packages/noworkflow/now/cmd/__init__.py"", line 47, in main
+    args.func(args)
+AttributeError: 'Namespace' object has no attribute 'func'",closed,leomurta,[bug],2016-02-05 16:32:13+00:00,2016-02-06 07:03:33+00:00,2016-02-06 07:03:33+00:00,JoaoFelipe
+78,Three bugs in programs slicing,"1- Prolog export fails for string types: It exports ''"", instead of ""''""
+2- Dependencies on calls use the wrong activation id, creating invalid dependencies
+3- Calls to external functions do not create dependencies between parameters and returns",closed,JoaoFelipe,[bug],2016-02-04 17:20:11+00:00,2016-02-06 07:10:02+00:00,2016-02-06 07:10:02+00:00,JoaoFelipe
+77,Collect exceptions,"Exceptions should be registered and associated with the activations that raised them and activations that catched them. 
+We could use them to create extra edges on the activation graph",open,JoaoFelipe,[enhancement],2016-02-01 20:36:43+00:00,2016-02-01 20:36:43+00:00,,
+76,Collect processor load,"From time to time, we could collect processor load",open,JoaoFelipe,[enhancement],2016-02-01 20:33:39+00:00,2016-02-01 20:33:39+00:00,,
+75,Support Unpack Generalizations on slicing,"Python 3.5 genarilized unpacking to support more than one on function calls:
+```python
+def f(i, j, k, l, **kwargs):
+    pass
+a = [1, 2]
+b = [3, 4]
+c = {'x': 5}
+d = {'y': 6}
+
+f(*a, *b, **c, **d)
+```
+We should create dependencies:
+i -> a
+j -> a
+k -> b
+l -> b
+kwargs -> c, d
+",open,JoaoFelipe,[bug],2016-02-01 20:31:13+00:00,2016-02-01 20:31:13+00:00,,
+74,Capture Definition Provenance from other files and class definitions,"Add an option to collect definition provenance from other modules other than the main script. 
+
+Currently, we capture only the content hash of the main script as definition provenance. The other local modules are captured as deployment provenance. So, we do not capture definition provenance from them that are useful for execution provenance (such as global variables names)
+
+We could expand FunctionDef table to not only store function definitions, but also classes and files, since they have the same attributes: trial_id, id, name, code_hash.
+We could also add an extra attribute: parent.
+This way, the following code would generate 4 definition objects
+```python
+# some_file.py
+class SomeClass(object):
+    def some_method(self):
+        def some_function():
+            pass
+```
+
+An extra attribute, qualname, could be provided for qualified name reference, according to https://www.python.org/dev/peps/pep-3155/ 
+
+Definition objects:
+```
+Definition(id=1, name=""some_file.py"", parent=None, qualname="""")
+Definition(id=2, name=""SomeClass"", parent=1, qualname=""SomeClass"")
+Definition(id=3, name=""some_method"", parent=2, qualname=""SomeClass.some_method"")
+Definition(id=4, name=""some_function"", parent=3, qualname=""SomeClass.some_method.<local>.some_function"")
+```
+
+Note that the qualname is not fully qualified, so we don't have the filename on it.
+
+ ",open,JoaoFelipe,[enhancement],2016-02-01 20:19:29+00:00,2016-02-02 22:08:50+00:00,,
+73,Export more data to Prolog,"Currently, noWorkflow exports only Trial(id), Activation, FileAccess, SlicingVariable, SlicingUsage, and SlicingDependency.
+
+It could export other data as well, including other basic Trial information, and other tables",open,JoaoFelipe,[enhancement],2016-02-01 19:47:35+00:00,2016-02-01 19:47:35+00:00,,
+72,Bug on %load_ext noworkflow,"I'm using Python 3.5.1. 
+When I try to load noworkflow extension on Jupyter, it fails with the error:
+```
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+<ipython-input-1-017b878e1cf4> in <module>()
+----> 1 get_ipython().magic('load_ext noworkflow')
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\IPython\core\interactiveshell.py in magic(self, arg_s)
+   2334         magic_name, _, magic_arg_s = arg_s.partition(' ')
+   2335         magic_name = magic_name.lstrip(prefilter.ESC_MAGIC)
+-> 2336         return self.run_line_magic(magic_name, magic_arg_s)
+   2337 
+   2338     #-------------------------------------------------------------------------
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\IPython\core\interactiveshell.py in run_line_magic(self, magic_name, line)
+   2255                 kwargs['local_ns'] = sys._getframe(stack_depth).f_locals
+   2256             with self.builtin_trap:
+-> 2257                 result = fn(*args,**kwargs)
+   2258             return result
+   2259 
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\IPython\core\magics\extension.py in load_ext(self, module_str)
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\IPython\core\magic.py in <lambda>(f, *a, **k)
+    191     # but it's overkill for just that one bit of state.
+    192     def magic_deco(arg):
+--> 193         call = lambda f, *a, **k: f(*a, **k)
+    194 
+    195         if callable(arg):
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\IPython\core\magics\extension.py in load_ext(self, module_str)
+     64         if not module_str:
+     65             raise UsageError('Missing module name.')
+---> 66         res = self.shell.extension_manager.load_extension(module_str)
+     67 
+     68         if res == 'already loaded':
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\IPython\core\extensions.py in load_extension(self, module_str)
+     87             if module_str not in sys.modules:
+     88                 with prepended_to_syspath(self.ipython_extension_dir):
+---> 89                     __import__(module_str)
+     90             mod = sys.modules[module_str]
+     91             if self._call_load_ipython_extension(mod):
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\__init__.py in <module>()
+     10 scientific workflow management system.
+     11 '''
+---> 12 from noworkflow.now.cmd import main
+     13 
+     14 
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\now\cmd\__init__.py in <module>()
+     10 
+     11 from .command import Command
+---> 12 from .cmd_run import Run
+     13 from .cmd_debug import Debug
+     14 from .cmd_list import List
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\now\cmd\cmd_run.py in <module>()
+     12 
+     13 from .command import Command
+---> 14 from .. import prov_definition
+     15 from .. import prov_deployment
+     16 from .. import prov_execution
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\now\prov_definition\__init__.py in <module>()
+     13 from ..utils import print_msg, meta_profiler
+     14 from ..persistence import persistence
+---> 15 from .function_visitor import FunctionVisitor
+     16 from .slicing_visitor import SlicingVisitor
+     17 from .definition import Definition
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\now\prov_definition\function_visitor.py in <module>()
+     12 from .context import Context
+     13 from ..cross_version import cross_compile, cvmap
+---> 14 from ..utils.bytecode.dis import instruction_dis_sorted_by_line
+     15 from ..persistence import persistence
+     16 
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\now\utils\bytecode\dis.py in <module>()
+     12 from collections import OrderedDict
+     13 
+---> 14 from .interpreter import InstructionInterpreter
+     15 
+     16 
+
+C:\Users\daniel\Anaconda3\envs\daniel\lib\site-packages\noworkflow\now\utils\bytecode\interpreter.py in <module>()
+     34 
+     35 SETUP_WITH = {opmap['SETUP_WITH'],}
+---> 36 WITH_CLEANUP = {opmap['WITH_CLEANUP'],}
+     37 
+     38 IMPORTS = {opmap['IMPORT_NAME'], opmap['IMPORT_FROM']}
+
+KeyError: 'WITH_CLEANUP'
+```",closed,danielpcampagna,[bug],2016-01-22 17:56:16+00:00,2016-02-02 22:07:35+00:00,2016-02-02 22:07:35+00:00,
+71,Demo command,"Create a ""demo"" command to extract a demonstration project",closed,JoaoFelipe,[enhancement],2016-01-13 20:39:28+00:00,2016-01-13 22:33:52+00:00,2016-01-13 22:33:52+00:00,
+70,Integrate variable slicing to activation provenance,"Currently, the program slicing is not connected to activation provenance. Thus, the only way to connect them on queries is to parse the artificial variable 'call <function name>', which is unreliable and hard.
+
+It is necessary to improve the collection to link the provenance at both granularities.",closed,JoaoFelipe,[enhancement],2016-01-12 02:51:32+00:00,2016-01-12 03:41:31+00:00,2016-01-12 03:41:31+00:00,
+69,Improve activation graphs,"1- The current summarizing hides the actual sequence of activations in an activation graph.
+It would be good to be able to visualize it better. Using boxes for activations might help in this issue.
+
+
+2- On diff graphs, red and green have two different semantics: time and diff (add/remove). It might confuse users. It would be better to have a different representation for diffs.
+
+
+3- Having two colors on nodes is also confusing. A single color could be used with an scale from red to white to green where red indicates ""trial 1 is faster than trial 2""; green indicates the opposite; and white indicates that neither are faster.
+
+It would be nice to have an uniform metaphor for (2) and (3). 
+Another possibility is to have an option to switch the visualization perspective: if it is _time_, do not show node diff. It it is _structure_, do not show time. This would make the color semantics more stable.",open,JoaoFelipe,[enhancement],2016-01-08 22:13:14+00:00,2016-01-08 22:13:14+00:00,,
+68,Use noWorkflow for education,"The provenance captured by noWorkflow could be used for education.
+
+Since it helps understanding what happened during the execution of a script, it is possible to use noWorkflow for teaching and learning Python. With this purpose, it would be nice to have better activation graphs, showing parameters, returns and all activations explicitly (i.e. without summarizations). 
+I worked on something in this direction with @henriquebastos, but we used Python decorators to collect calls, instead of noWorkflow: https://gist.github.com/henriquebastos/a28ef88f12d98a410df9 
+
+There are other possible uses for noWorkflow in education. It could be used for homework answer checking and validation. Instead of submitting the final script as an answer to a homework assignment, a student could submit the provenance of a trial, captured by noWorkflow. Then, the professor could use it to:
+- check if there was no cheating, by looking at the environment properties, comparing provenance graphs and files between students;
+- check if the script actually works, by looking at the used modules, and verifying if the provenance graph makes sense.
+
+The student could also use the provenance as a ""proof"" that the script worked on her machine.
+ 
+A third use case for noWorkflow in education could be asking help. It could be possible to publish a provenance page in a website. When a person wanted to ask ""X is not working as expected, what is the reason?"" (in sites such stackoverflow, or class groups), instead of just asking and presenting the code, she could send the provenance page link to give more context.
+",open,JoaoFelipe,[enhancement],2015-12-17 23:39:32+00:00,2015-12-17 23:39:53+00:00,,
+67,Fix README.md,,closed,remram44,[],2015-10-30 19:35:59+00:00,2015-11-01 07:02:25+00:00,2015-11-01 07:02:25+00:00,
+66,Incomplete function definition and activations names,"#20 added the possibility to parse the AST of all python files in the package
+
+Now, it is possible to have the same function name, in the same line, but in two different files, with no reference to the file
+
+To solve this issue, either use a fully qualified name, or store the file for every function definition / activation name",open,JoaoFelipe,[bug],2015-10-28 04:07:38+00:00,2015-10-28 04:07:38+00:00,,
+65,Partial execution provenance storage,"Currently, all the provenance is stored at the end of the execution. It is necessary to create a function that partially stores it to allow users to use it for debugging (#58) and monitoring (#64)",closed,JoaoFelipe,[enhancement],2015-10-28 03:51:23+00:00,2015-10-29 02:59:26+00:00,2015-10-29 02:59:26+00:00,
+64,"""On line"" monitoring",Allow users to visualize and query provenance while the trial is still being executed,open,JoaoFelipe,[enhancement],2015-10-28 03:47:40+00:00,2015-10-28 03:47:40+00:00,,
+63,Work with ids during execution collection,"Currently, noWorkflow uses a ""complex"" data structure during execution: the Activation object has a list of children activations, a list of Object Values (for arguments, and globals), a list of File Access.
+
+When we save it, we have to navigate the whole activation stack in order to set the actual id and save the activations in the correct order. 
+
+It makes it harder to add features such as partial saving the data, since it has a very specific order  to save.
+
+We could use something simpler that calculates its __id__ during the execution and just store it as is.
+
+In this issue, I propose to stop using a global __id__ as primary key of Activation, ObjectValue, FileAccess and use restart the __id__ for every trial and use the combination __trial_id__, __id__ 
+
+It is already implemented at the ObjectStore class for Program Slicing variables, dependencies and usages, so it won't be hard to adapt to Profiler.
+
+However, this change will break all the existing databases, and may break other parts of the code.",closed,JoaoFelipe,[enhancement],2015-10-28 00:16:18+00:00,2015-10-28 11:34:53+00:00,2015-10-28 03:57:21+00:00,
+62,Support Threads,There are some discussion about it on #30 ,open,JoaoFelipe,[enhancement],2015-10-28 00:00:15+00:00,2015-10-28 00:00:15+00:00,,
+61,For loop extra variable for slicing,"In the following loop, Python traces the 'for' line 3 times, and the block lines 2 times
+```python
+for i in range(2):
+    a = 5
+    i = a
+print(i)
+```
+Line Trace:
+```
+line 1: 'for i in range(3)'
+line 2: 'a = 5'
+line 3: 'i = a'
+line 1: 'for i in range(3)'
+line 2: 'a = 5'
+line 3: 'i = a'
+line 1: 'for i in range(3)'
+line 4: 'print(i)'
+```
+
+Every time it traces a 'for' line, it creates a new slicing_variable 'i' that depends on 'range'.
+However, since the 'for' line is executed one time more, before exiting the loop, an extra slicing_variable is created and we lose the reference that 'i' on line 4 was defined on line 3 and depends on 'a'",closed,JoaoFelipe,[bug],2015-10-26 23:21:39+00:00,2016-02-06 07:10:14+00:00,2016-02-06 07:10:14+00:00,
+60,Program slicing of GenExpr,"Program slicing is not capturing GenExpr dependencies properly.
+
+Check the following code:
+```python
+def double(x):
+    return 2*x
+
+def other_scope(gen):
+    cond = 4
+    for i in gen:
+        print(i)
+
+cond = 2
+lis = [1, 2, 3]
+gen1 = (double(x) for x in lis)
+gen2 = (double(double(x)) for x in lis)
+gen3 = (x for x in lis if x > cond)
+
+for j in gen1:
+     print(j)
+outer_scope(gen2)
+outer_scope(gen3)
+```",open,JoaoFelipe,[bug],2015-10-26 23:14:44+00:00,2015-10-26 23:14:44+00:00,,
+59,With statement during slicing bug,"When there are ""with"" statements, the slicing fails
+
+Python calls \_\_enter\_\_ and \_\_exit\_\_ methods without the default CALL_FUNCTION bytecode and the slicing fails to match these calls
+
+To fix it, it is necessary to deal with the 'with' bytecode:
+SETUP_WITH (for \_\_enter\_\_) and WITH_CLEANUP (for \_\_exit\_\_)
+
+It is also necessary do add a missing dependency. The optional variable depends on the result of \_\_enter\_\_:
+```python
+class MyWith(object):
+    def __enter__(self):
+        a = 2
+        return a
+
+    def __exit__(self, exc_type, exc_val, exc_tb):
+        return True
+
+ignore_exceptions = MyWith()
+
+with ignore_exceptions as value:
+    print(value)
+    invalid_code
+
+print('done')
+```
+ 
+In this example, 'value' depends on the result of 'ignore_exceptions.\_\_enter\_\_', that depends on 'a'
+",closed,JoaoFelipe,[bug],2015-10-26 03:11:37+00:00,2015-10-26 23:46:41+00:00,2015-10-26 23:46:41+00:00,
+58,Debugger,Use provenance for debugging,closed,JoaoFelipe,[enhancement],2015-10-25 20:50:08+00:00,2015-11-09 04:23:17+00:00,2015-11-09 04:23:17+00:00,
+57,Prolog name rule mix access id with activation id,Add prefix to access id for disambiguation,closed,JoaoFelipe,[bug],2015-08-09 23:03:47+00:00,2015-08-18 14:08:10+00:00,2015-08-18 14:08:10+00:00,
+56,Interactive mode for IPython Notebook,"Share variables with notebook if run script in interactive mode.
+
+Ex:
+```python
+In [1]: a = 2
+
+In [2]: %%now_run --interactive
+   ...  b = a * 2
+
+In [3]: b
+Out[3]: 4
+
+```",closed,JoaoFelipe,[],2015-07-04 06:43:03+00:00,2015-08-18 14:07:15+00:00,2015-08-18 14:07:15+00:00,
+55,Add loading icon,"Some trial information are taking some time to load. While it is loading, now vis show a blank space. A loading gif is useful to indicate it is loading",closed,JoaoFelipe,[enhancement],2015-05-29 00:00:21+00:00,2016-02-26 21:32:25+00:00,2015-05-31 07:22:10+00:00,
+54,Select what does it capture,"Curently, it is possible to capture execution provenance at two granularities:
+- Coarse-grained granularity (Profiler): function activations, parameters, globals, files
+- Fine-grained granularity (Tracer): (Profiler) + variables values and dependencies between variables
+
+It would be nice to have more freedom in selecting what to capture:
+- I want to capture function activations using the Profiler, but skip capturing the files, since they can be too big
+- I want to capture variable dependencies using the Tracer for program slicing, but skip capturing everthing else",open,JoaoFelipe,[enhancement],2015-05-28 23:51:27+00:00,2016-02-01 19:56:21+00:00,,
+53,Web example of IPython Notebook,"Include an example of the IPython notebook on the Web (in a server) so people can play with it.
+
+Maybe host now vis too",open,JoaoFelipe,[],2015-05-28 23:42:47+00:00,2015-05-28 23:42:47+00:00,,
+52, Integrate noWorkflow and ReproZip,"ReproZip could have provenance analysis like noWorkflow; also, noWorkflow can use the provenance captured by ReproZip to improve its analysis. Many of the applied math examples use Python + Fortran: in fact, many of the file operations happen in the Fortran side. When combining both tools, even the non-Python operations could be detected and integrated.",open,JoaoFelipe,[enhancement],2015-05-28 23:41:19+00:00,2015-05-28 23:41:19+00:00,,
+51,Diff for function activations,Compare activations parameters and returns between trials,open,JoaoFelipe,[enhancement],2015-05-28 23:39:48+00:00,2015-05-28 23:39:54+00:00,,
+50,Cache activation graphs,"Some activation graphs are taking a long time for calculations.
+Maybe a cache can minimize this problem
+
+A cache may also help on loading pre-calculated results of #49
+",closed,JoaoFelipe,[enhancement],2015-05-28 23:37:38+00:00,2016-02-26 21:32:25+00:00,2015-05-30 03:00:36+00:00,JoaoFelipe
+49,Metaheuristic for matching activation graphs,"Use a metaheuristics to improve the activation graph matching on diffs
+",closed,JoaoFelipe,[enhancement],2015-05-28 23:36:03+00:00,2016-02-26 21:32:37+00:00,2015-05-31 07:22:04+00:00,JoaoFelipe
+48,Default now run is not capturing global variables,,closed,JoaoFelipe,[bug],2015-05-04 03:16:39+00:00,2016-02-26 21:32:45+00:00,2015-05-05 00:12:52+00:00,
+47,IPython Required?,"I think that the `.now.ipython` import in `noworkflow/__init__.py` means that IPython is required to run noWorkflow conflicting the README. However, I tried moving that import inside the `load_ipython_extension` method, and that did allow the help message to be printed without IPython installed.",closed,dakoop,[bug],2015-04-14 17:55:19+00:00,2016-02-26 21:32:55+00:00,2015-04-14 20:50:23+00:00,
+46,Cell Magic for IPython Notebook,"Support cell magic for ipython notebook:
+Example
+```python
+In [1]: my_var = 2
+In [2]: %%now --name script1 $my_var 30
+   ...: import sys
+   ...: print(sys.argv[1])
+   ...: print(sys.argv[2])
+2
+30
+Out [2]: <Trial 1>
+```
+This should run the code in the cell using noworkflow and return a trial object.
+The default visualization of a trial object is an activation graph using ipython notebook. ",closed,JoaoFelipe,[enhancement],2015-03-26 03:37:44+00:00,2016-02-26 21:33:05+00:00,2015-04-12 22:09:38+00:00,
+45,Rename checkout operation to restore,,closed,JoaoFelipe,[enhancement],2015-03-17 15:48:16+00:00,2016-02-26 21:32:55+00:00,2015-03-17 15:49:14+00:00,
+44,"Add parameter to select directory for show, list, export, diff, vis and checkout",,closed,JoaoFelipe,[enhancement],2015-02-27 20:36:00+00:00,2016-02-26 21:32:55+00:00,2015-03-26 06:28:14+00:00,
+43,Invalid call identification by column causes KeyError with Tracer,"The error appears by running “now run -e Tracer tests/weather/simulation.py tests/weather/data1.dat tests/weather/data2.dat” on version 0.7.0. The error message is attached below.
+
+```python
+[now] the execution finished with an uncaught exception. Traceback (most recent call last):
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/cmd/cmd_run.py"", line 109, in run
+    exec(metascript['compiled'], __main__.__dict__)
+  File ""/Users/syc/Documents/noworkflow/tests/weather/simulation.py"", line 38, in <module>
+    data = run_simulation(data_a, data_b)
+  File ""/Users/syc/Documents/noworkflow/tests/weather/simulation.py"", line 7, in run_simulation
+    a = csv_read(data_a)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/slicing.py"", line 330, in tracer
+    return super(Tracer, self).tracer(frame, event, arg)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/profiler.py"", line 174, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/base.py"", line 44, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/slicing.py"", line 306, in trace_return
+    super(Tracer, self).trace_return(frame, event, arg)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/profiler.py"", line 160, in trace_return
+    self.close_activation(event, arg)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/slicing.py"", line 176, in close_activation
+    self.slice_line(*line)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/slicing.py"", line 169, in slice_line
+    add_dependencies(variables[vid], activation, others)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/slicing.py"", line 142, in add_dependencies
+    add_dependency(var, dep, activation)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.7.0-py2.7.egg/noworkflow/now/prov_execution/slicing.py"", line 120, in add_dependency
+    call = self.call_by_col[dep[0]][dep[1]]
+KeyError: -1
+```
+
+Bug reported by Suzanna Yang Cao",closed,JoaoFelipe,[bug],2015-02-26 21:29:30+00:00,2016-02-26 21:33:15+00:00,2015-02-27 19:55:35+00:00,
+42,Detect variable usage during del operation for program slicing,"When a variable is deleted, its ctx is set as ""Del"". Variable usages are created using only ctx ""Load"". So it is not possible to query ""Where did the variable X deleted in line 7 come from"", as this deletion is not stored.",closed,JoaoFelipe,[bug],2015-02-22 02:49:56+00:00,2015-10-26 23:46:29+00:00,2015-10-26 23:46:29+00:00,
+41,tests fails,"Installed from pip and running with python 2.7.6.
+
+  File ""/User/lib/python2.7/site-packages/noworkflow/now/prov_definition/function_visitor.py"", line 89, in extract_disasm
+    self.metascript['code'], self.metascript['path'], 'exec')
+  File ""/noworkflow/tests/example1.py"", line 22
+    print 40
+           ^
+SyntaxError: invalid syntax
+",closed,aspinuso,[bug],2015-02-06 16:27:11+00:00,2016-02-26 21:33:22+00:00,2015-02-06 20:16:35+00:00,
+40,IPython notebook support for data visualization,"Since IPython notebook files can be shared, it would be good to support an export method for trials, history and even prolog facts that could be loaded on IPython notebook without relying on the visualization tool server.",closed,JoaoFelipe,[enhancement],2015-01-19 14:58:06+00:00,2016-02-26 21:33:22+00:00,2015-02-06 20:17:18+00:00,
+39,Python Omniscient Debugger,"Python Omniscient Debugger: https://github.com/rodsenra/pode
+
+They capture variables and events in a similar way that we do for program slicing (using python tracer). 
+The main difference is that they don't capture the dependencies. They capture only the values after the assignments.
+Another difference is that while we look at the AST, they look at the disasm to extract assingments, which is probably easier. Maybe we can explore it in the future since we already look at the disasm to extract the position of function calls.
+
+There is a hangout in portuguese explaining the code: https://www.youtube.com/watch?v=MxzZXBI5T1s
+",open,JoaoFelipe,[related work],2014-12-19 03:02:07+00:00,2014-12-19 03:02:07+00:00,,
+38,Dynamic Slicing of python programs,http://ieeexplore.ieee.org/xpl/login.jsp?tp=&arnumber=6899220&url=http%3A%2F%2Fieeexplore.ieee.org%2Fxpls%2Fabs_all.jsp%3Farnumber%3D6899220,open,JoaoFelipe,[related work],2014-11-18 13:55:09+00:00,2014-11-19 01:02:54+00:00,,
+37,yield during slicing bug,"The following code does not work with the program slicing:
+```python
+def f(l):
+	for x in l:
+		yield x
+
+a = range(10)
+for x in f(a):
+	print x
+```
+
+Traceback
+```
+python ~/noworkflow/capture/noworkflow/main.py run -e Tracer test_cov.py 
+33
+[now] the execution finished with an uncaught exception. Traceback (most recent call last):
+  File ""/home/joao/noworkflow/capture/noworkflow/now/cmd/cmd_run.py"", line 91, in run
+    exec(metascript['compiled'], __main__.__dict__)
+  File ""/home/joao/noworkflow/tests/test_cov.py"", line 6, in <module>
+    for x in f(a):
+  File ""/home/joao/noworkflow/tests/test_cov.py"", line 1, in f
+    def f(l):
+  File ""/home/joao/noworkflow/capture/noworkflow/now/prov_execution/slicing.py"", line 323, in tracer
+    return super(Tracer, self).tracer(frame, event, arg)
+  File ""/home/joao/noworkflow/capture/noworkflow/now/prov_execution/profiler.py"", line 151, in tracer
+    super(Profiler, self).tracer(frame, event, arg)
+  File ""/home/joao/noworkflow/capture/noworkflow/now/prov_execution/base.py"", line 34, in tracer
+    self.event_map[event](frame, event, arg)
+  File ""/home/joao/noworkflow/capture/noworkflow/now/prov_execution/slicing.py"", line 285, in trace_call
+    self.add_argument_variables(frame)
+  File ""/home/joao/noworkflow/capture/noworkflow/now/prov_execution/slicing.py"", line 243, in add_argument_variables
+    call = self.call_by_lasti[back.f_lineno][back.f_lasti]
+KeyError: 33
+```
+
+Disasm
+```python
+  1           0 LOAD_CONST               0 (<code object f at 0x7f66e3267730, file ""/home/joao/noworkflow/tests/test_cov.py"", line 1>)
+              3 MAKE_FUNCTION            0
+              6 STORE_NAME               0 (f)
+
+  5           9 LOAD_NAME                1 (range)
+             12 LOAD_CONST               1 (10)
+             15 CALL_FUNCTION            1 | F(func=['range'], args=[[]], keywords={}, *args=[], **kwargs=[])
+             18 STORE_NAME               2 (a)
+
+  6          21 SETUP_LOOP              25 (to 49)
+             24 LOAD_NAME                0 (f)
+             27 LOAD_NAME                2 (a)
+             30 CALL_FUNCTION            1 | F(func=['f'], args=[['a']], keywords={}, *args=[], **kwargs=[])
+             33 GET_ITER            
+        >>   34 FOR_ITER                11 (to 48)
+             37 STORE_NAME               3 (x)
+
+  7          40 LOAD_NAME                3 (x)
+             43 PRINT_ITEM          
+             44 PRINT_NEWLINE       
+             45 JUMP_ABSOLUTE           34
+        >>   48 POP_BLOCK           
+        >>   49 LOAD_CONST               2 (None)
+             52 RETURN_VALUE        
+  2           0 SETUP_LOOP              19 (to 22)
+              3 LOAD_FAST                0 (l)
+              6 GET_ITER            
+        >>    7 FOR_ITER                11 (to 21)
+             10 STORE_FAST               1 (x)
+
+  3          13 LOAD_FAST                1 (x)
+             16 YIELD_VALUE         
+             17 POP_TOP             
+             18 JUMP_ABSOLUTE            7
+        >>   21 POP_BLOCK           
+        >>   22 LOAD_CONST               0 (None)
+             25 RETURN_VALUE    
+```
+
+
+```python
+line = 6
+last_i = 33 
+call_by_lasti = defaultdict(<type 'dict'>, {
+    1: {}, 
+    2: {}, 
+    3: {}, 
+    5: {15: F(func=['range'], args=[[]], keywords={}, *args=[], **kwargs=[])}, 
+    6: {30: F(func=['f'], args=[['a']], keywords={}, *args=[], **kwargs=[])}, 
+    7: {}})
+```
+
+In the line 6, it captures the function ""f"" with last_i 30, but during the execution the ""for"" calls the function through get_iter (last_i 33)
+",closed,JoaoFelipe,[bug],2014-11-16 15:38:38+00:00,2015-10-26 23:46:21+00:00,2015-10-26 23:46:21+00:00,
+36,"Set, dict, generic comprehension and disasm bug","The only comprehension that is working is the list comprehension. The others (dict, set, parameter) fail during the disasm phase
+```python
+a = range(10)
+b = [x for x in a] # ok
+c = sum(x for x in a) # fails
+d = {x for x in a} # fails
+e = {x:x for x in a} # fails  
+```
+
+It seems that those comprehensions call a function in the disassembly but the function is not being caught in the AST phase, so the disasm phase cannot match the function in the following line 
+```python
+calls_by_lasti[f_lasti] = calls_by_line[col]
+```",closed,JoaoFelipe,[bug],2014-11-16 15:23:43+00:00,2016-02-26 21:33:15+00:00,2015-02-27 19:58:00+00:00,
+35,Complex data slicing,"The current program slicing does not handle complex data such as lists, dicts and objects very well.
+ToDo: 
+- Consider __getitem__: a[b]
+- Consider __getattr__: a.b
+- Treat parameters and assignments of variables that are references. 
+
+Current issues:
+```python
+def fn(x, y, z, w):
+    x.attr = y 
+
+o = SomeObject()
+a, b, c = 1, 2, 3
+o[a] = b 
+v = o
+v[a] = c 
+
+fn(o, a, b, c)
+```
+
+With the line ""v[a] = c"", both ""o[a]"" and ""v[a]"" should depend on ""c"". 
+With the line ""x.attr = y"", both ""x.attr"", ""v.attr"" and ""o.attr"" should depend on ""y"".
+How to deal with these situations?
+
+There are some discussion regarding this issue in #19 ",open,JoaoFelipe,[enhancement],2014-11-06 00:38:41+00:00,2014-11-06 11:23:03+00:00,,
+34,Navigate to previous versions,"I just realized that I didn't create an issue for this part of the cm project
+
+I need a suggestion for the command name: navigate, checkout, restore?
+",closed,JoaoFelipe,[enhancement],2014-10-03 02:06:57+00:00,2016-02-26 21:33:30+00:00,2014-11-17 18:48:39+00:00,
+33,Semantic Versioning for Trial,"I liked the idea proposed to Vitor to use a trial id using the format MAJOR.MINOR.PATCH, and I think it can be applied here
+
+Meaning:
+MAJOR: code version
+MINOR: params version
+PATCH: execution number
+
+For example, let`s say I have the following script
+```python
+# script.py
+import sys
+print sys.argv
+```
+If I execute `now run script.py 1`, it should generate the trial id 0.0.0 (or maybe another starting number) 
+If I execute the exactly same command again, it generate the trial id 0.0.1 and so on
+
+If I change the params and execute `now run script.py 2`, it should generate the trial id 0.1.0
+If I change the params again and execute `now run script.py 3`, it should generate the trial id 0.2.0
+
+If I decide to change the code:
+```python
+# script.py
+import sys
+print sys.argv[1]
+```
+And execute it again `now run script.py 1`, the new version should be 1.0.0
+
+----
+
+Questions:
+1- Is it natural to have a Trial 0.0.0? Or it is better to start with 1.1.1? Or even 0.0.1?
+2- Are the params independent from the code version? In the previous example, after changing the code, if I run `now run script.py 3`, should it generate the trial id 1.2.0 (knowing that the param '3' was used in 0.2.0) or generate the trial id 1.1.0, because the last MINOR was 0?
+
+
+
+",open,JoaoFelipe,[enhancement],2014-09-11 06:22:20+00:00,2014-09-11 14:27:09+00:00,,
+32,Function args not being captured,"After the refactoring that replaced the inspect.getargvalues(frame), the sequential args stopped being captured.
+
+*args and **kwargs still work ",closed,JoaoFelipe,[bug],2014-09-08 20:38:20+00:00,2016-02-26 21:34:07+00:00,2014-09-08 20:41:45+00:00,
+31,Parametrize the graph visualization (combine counting vs independent counting),"As @leomurta suggested in #28:
+
+> This can be parametrized. Depending on the analysis scenario, the user may switch the plug and observe the data in a different way. Actually, try to play with both visualizations to figure out which questions they help on answering.
+
+> The problem that I foresee in not propagating is this: if the function has a control structure that switches 90% of the time to a() and 10% of the time to b(), you would show two call edges, both with weight 1, one to a() and the other to b(). This does not clearly reflect the call distribution.
+
+> My feeling: the visualization without propagation mimics the syntactic structure of the script. The visualization with propagation mimics the dynamic structure of the system. In a more complex graph, the explicit count (with propagation) is probably easier to see how many times each function is being executed.
+
+",closed,JoaoFelipe,[enhancement],2014-09-06 23:59:11+00:00,2016-02-26 21:34:33+00:00,2014-09-07 00:54:50+00:00,
+30,The id column in the database does not express anymore the order in which the element appears,"Previous versions of noWorkflow assumed that the id column in the database reflects the order in which functions are activated, arguments are passed, and so on. After the change to store data in batch, this property got lost. Not sure if it is important to keep this property or not, but this should be checked. 
+
+The graph visualization, for instance, processes function activations ordered by id. I am changing it to order by start time. However, it is worth it to search for other ""order by id"" in the project and evaluate possible side effects. Arguments may need to have an extra field to express the order they appear.",closed,leomurta,[bug],2014-09-05 22:00:10+00:00,2015-10-28 03:57:12+00:00,2015-10-28 03:57:12+00:00,JoaoFelipe
+29,Use collapse to allow showing/omitting inner function subgraph,"Currently we plot the whole graph, showing all nodes at once. An alternative for this is replacing somehow the call/return edges by node collapse. When clicked, a node would expose its inner nodes, together with their sequence edges, recursively. ",closed,leomurta,[enhancement],2014-09-04 03:11:13+00:00,2016-02-26 21:34:43+00:00,2014-09-06 20:25:56+00:00,JoaoFelipe
+28,Function within loop bug,"This bug apparently occurs because we use caller_id, line and name to compose the key for grouping different activations of the same function call. But caller_id changes in each invocation. 
+
+Using the complete namespace (line/name of all functions in the call stack) and the line/name of the current function as a key to identify functions will probably solve this bug.",closed,leomurta,[bug],2014-09-04 02:06:23+00:00,2014-09-06 23:59:11+00:00,2014-09-06 01:17:45+00:00,JoaoFelipe
+27,Erro ao tentar pegar valor atual da SEQUENCE no BD,"Tentei rodar a versão mais recente do master e recebo o seguinte erro. Minha versão do Python é 2.7.3:
+```
+camundongo:weather leomurta$ now run simulation.py data1.dat data2.dat 
+Traceback (most recent call last):
+  File ""/Users/leomurta/Library/Enthought/Canopy_64bit/User/bin/now"", line 9, in <module>
+    load_entry_point('noworkflow==0.3.1-dev', 'console_scripts', 'now')()
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/now.py"", line 65, in main
+    args.func(args)
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/cmd_run.py"", line 64, in execute
+    prov_execution.store()  # TODO: exceptions should be registered as return from the activation and stored in the database. We are currently ignoring all the activation tree when exceptions are raised.
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/prov_execution.py"", line 269, in store
+    provider.store()
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/prov_execution.py"", line 226, in store
+    persistence.update_trial(now, self.function_activation)
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/persistence.py"", line 132, in update_trial
+    store_function_activation(function_activation, None)
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/persistence.py"", line 219, in store_function_activation
+    function_activation_id = function_activation_id_seq()
+  File ""/Users/leomurta/workspace/noworkflow/capture/noworkflow/persistence.py"", line 114, in function_activation_id_seq
+    (an_id,) = db.execute(""select seq from SQLITE_SEQUENCE WHERE name='function_activation'"").fetchone()
+TypeError: 'NoneType' object is not iterable
+```",closed,leomurta,[bug],2014-09-04 01:24:59+00:00,2016-02-26 21:33:47+00:00,2014-09-04 03:31:19+00:00,JoaoFelipe
+26,Python 3 support,"Provide python 3 support, and keep python 2.7 support",closed,JoaoFelipe,[enhancement],2014-08-26 18:30:52+00:00,2016-02-26 21:34:33+00:00,2014-11-30 01:17:15+00:00,
+25,Prolog export bug,"I wrote a simple python script, executed it (now run script.py) and tried to export it to prolog (now export -r >> result.pl)
+The generated .pl didn't have the access facts and when I tried to query the results, I received errors
+
+script.py
+```python
+def fn(arg1):
+    print arg1
+def main():
+    fn(""teste"")
+if __name__ == '__main__':
+    main()
+```
+
+result.pl
+```prolog
+
+%
+% FACT: activation(id, name, start, finish, caller_activation_id).
+%
+
+activation(1, '/home/joao/projects/exemplo/script.py', 1408974736.650279, 1408974736.651658, nil).
+activation(2, 'main', 1408974736.650899, 1408974736.651635, 1).
+activation(3, 'fn', 1408974736.651465, 1408974736.651602, 2).
+
+%
+% FACT: access(id, name, mode, content_hash_before, content_hash_after, timestamp, activation_id).
+%
+
+
+%
+% ID-BASED ACCESSOR RULES FOR
+% activation(id, name, start, finish, caller_activation_id).
+% access(id, name, mode, content_hash_before, content_hash_after, timestamp, activation_id).
+%
+
+name([], []).
+name([Id|Ids], [Name|Names]) :- name(Id, Name), name(Ids, Names).
+name(Id, Name) :- activation(Id, Name, _, _, _).
+name(Id, Name) :- access(Id, Name, _, _, _, _, _).
+
+timestamp_id(Id, Start, start) :- activation(Id, _, Start, _, _).
+timestamp_id(Id, Finish, finish) :- activation(Id, _, _, Finish, _).
+timestamp_id(Id, Timestamp) :- access(Id, _, _, _, _, Timestamp, _).
+duration_id(Id, Duration) :- timestamp_id(Id, Start, start), timestamp_id(Id, Finish, finish), Duration is Finish - Start.
+successor_id(Before, After) :- timestamp_id(Before, TS1, start), timestamp_id(After, TS2, finish), TS1 =< TS2.
+successor_id(Before, After) :- timestamp_id(Before, TS1), timestamp_id(After, TS2), TS1 =< TS2.
+
+activation_id(Caller, Called) :- activation(Called, _, _, _, Caller).
+
+mode_id(Id, Mode) :- access(Id, _, Mode, _, _, _, _).
+file_read_id(Id) :- mode_id(Id, Mode), atom_prefix(Mode, 'r').
+file_written_id(Id) :- mode_id(Id, Mode), atom_prefix(Mode, 'w').
+
+hash_id(Id, Hash, before) :- access(Id, _, _, Hash, _, _, _).
+hash_id(Id, Hash, after) :- access(Id, _, _, _, Hash, _, _).
+changed_id(Id) :- hash_id(Id, Hash1, before), hash_id(Id, Hash2, after), Hash1 \== Hash2.
+
+access_id(Function, File) :- access(File, _, _, _, _, _, Function).
+
+%
+% ID-BASED INFERENCE RULES
+%
+
+activation_stack_id(Called, []) :- activation_id(nil, Called). 
+activation_stack_id(Called, [Caller|Callers]) :- activation_id(Caller, Called), activation_stack_id(Caller, Callers).
+
+indirect_activation_id(Caller, Called) :- activation_stack_id(Called, Callers), member(Caller, Callers).
+
+% Naive! Should check arguments and return values (program slicing?) to avoid false positives
+activation_influence_id(Influencer, Influenced) :- successor_id(Influencer, Influenced).
+
+access_stack_id(File, [Function|Functions]) :- access_id(Function, File), activation_stack_id(Function, Functions).
+
+indirect_access_id(Function, File) :- access_stack_id(File, Functions), member(Function, Functions).
+
+access_influence_id(Influencer, Influenced) :- file_read_id(Influencer), file_written_id(Influenced), successor_id(Influencer, Influenced), access_id(F1, Influencer), access_id(F2, Influenced), activation_influence_id(F1, F2).
+
+%
+% NAME-BASED ACCESSOR RULES
+%
+
+timestamp(Name, Timestamp, Moment) :- timestamp_id(Id, Timestamp, Moment), name(Id, Name).
+timestamp(Name, Timestamp) :- timestamp_id(Id, Timestamp), name(Id, Name).
+duration(Name, Duration) :- duration_id(Id, Duration), name(Id, Name). 
+successor(Before, After) :- successor_id(Before_id, After_id), name(Before_id, Before), name(After_id, After).
+mode(Name, Mode) :- mode(Id, Mode), name(Id, Name).
+file_read(Name) :- file_read_id(Id), name(Id, Name).
+file_written(Name) :- file_written_id(Id), name(Id, Name).
+hash(Name, Hash, Moment) :- hash_id(Id, Hash, Moment), name(Id, Name).
+changed(Name) :- changed_id(Id), name(Id, Name).
+
+%
+% NAME-BASED INFERENCE RULES
+%
+
+activation_stack(Called, Callers) :- activation_stack_id(Called_id, Caller_ids), name(Called_id, Called), name(Caller_ids, Callers).
+indirect_activation(Caller, Called) :- indirect_activation_id(Caller_id, Called_id), name(Called_id, Called), name(Caller_id, Caller).
+activation_influence(Influencer, Influenced) :- activation_influence_id(Influencer_id, Influenced_id), name(Influencer_id, Influencer), name(Influenced_id, Influenced).
+access_stack(File, Functions) :- access_stack_id(File_id, Functions_id), name(File_id, File), name(Functions_id, Functions).
+indirect_access(Function, File) :- indirect_access_id(Function_id, File_id), name(Function_id, Function), name(File_id, File).
+access_influence(Influencer, Influenced) :- access_influence_id(Influencer_id, Influenced_id), name(Influencer_id, Influencer), name(Influenced_id, Influenced).
+```
+
+Execution:
+```
+$ swipl
+?- [result].
+% result compiled 0.00 sec, 44 clauses
+true.
+
+?- name(X, 'fn').
+X = 3
+?- activation_stack('fn', X).
+ERROR: name/2: Undefined procedure: access/7
+   Exception: (8) access(1, fn, _G1015, _G1016, _G1017, _G1018, _G1019) ?
+```
+",closed,JoaoFelipe,[bug],2014-08-25 17:22:33+00:00,2016-02-26 21:33:46+00:00,2014-08-26 16:48:17+00:00,
+24,Investigate techniques for summarizing and visualizing provenance graphs,"Also analyze different ways to contrast different trials.
+
+Related work regarding trace diff: http://www.bibbase.org/network/publication/missier-woodman-hiden-watson-provenanceanddatadifferencingforworkflowreproducibilityanalysis-2013",open,JoaoFelipe,"[enhancement, related work]",2014-08-08 05:29:57+00:00,2014-08-08 05:29:57+00:00,,
+23,Integrate provenance at different levels,E.g.: Integrate operating system level with function level,open,JoaoFelipe,[enhancement],2014-08-08 05:25:31+00:00,2014-08-08 05:25:44+00:00,,
+22,Include data in the provenance graph,"When possible, include argument and return values,
+This would not be possible for loops",closed,JoaoFelipe,[enhancement],2014-08-08 05:21:00+00:00,2016-02-26 21:34:43+00:00,2014-10-05 05:24:49+00:00,
+21,Workflow evolution story,"Create a graph with trial nodes as revisions. (VisTrails-style provenance)
+When you clink on a node, it should open the trial workflow
+
+Eg.: http://www.vistrails.org/index.php/File:Cmop-ss.png ",closed,JoaoFelipe,[enhancement],2014-08-08 05:17:42+00:00,2016-02-26 21:34:33+00:00,2014-11-18 01:58:42+00:00,
+20,Configure granularity of capture,"Possible configurations
+- Capture all variables being used
+- Capture provenance at user-defined function level (default)
+- Capture provenance at deeper function levels",open,JoaoFelipe,[enhancement],2014-08-08 04:52:25+00:00,2014-08-08 04:52:33+00:00,,
+19,Program slicing,Extract the program slicing to better identify function/data dependencies,closed,JoaoFelipe,[enhancement],2014-08-08 04:35:40+00:00,2016-02-26 21:34:07+00:00,2014-11-06 00:05:02+00:00,
+18,Very slow execution,A script using netCDF4 that executes in less than 5s with pure python is taking more than 2 hours to execute with noWorkflow. I believe it is an issue with the storage of activations with sqlite since the script is O(n³) and n seems to be big,closed,JoaoFelipe,[bug],2014-08-08 03:56:25+00:00,2016-02-26 21:33:46+00:00,2014-08-30 04:17:37+00:00,
+17,AttributeError on self.calls.append when there are no functions,"Issue occurs in prov_definition.py when the script has no functions
+
+self.calls, self.global_vars, self.arguments are never initialized, because the initialization occurs in visit_FunctionDef (https://github.com/gems-uff/noworkflow/blob/master/capture/noworkflow/prov_definition.py#L39) that is just called where there are defined functions
+
+Script:
+```python
+f1 = open('in.dat', 'r')
+total = 0
+for myline in f1:
+    myval = int(myline.strip())
+    total += myval
+f1.close()
+
+f2 = open('out.dat', 'w')
+print >>f2, total
+f2.close()
+```
+
+Traceback:
+```
+$ now run -v script2.py
+[now] removing noWorkflow boilerplate
+[now] setting up local provenance store
+[now] collecting definition provenance
+[now]   registering user-defined functions
+Traceback (most recent call last):
+  File ""/usr/local/bin/now"", line 9, in <module>
+    load_entry_point('noworkflow==0.3', 'console_scripts', 'now')()
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/now.py"", line 63, in main
+    args.func(args)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/cmd_run.py"", line 43, in execute
+    prov_definition.collect_provenance(args)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/prov_definition.py"", line 92, in collect_provenance
+    functions = find_functions(args.script, code)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/prov_definition.py"", line 75, in find_functions
+    visitor.visit(tree)
+  File ""/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ast.py"", line 241, in visit
+    return visitor(node)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/prov_definition.py"", line 32, in generic_visit
+    ast.NodeVisitor.generic_visit(self, node)
+  File ""/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ast.py"", line 249, in generic_visit
+    self.visit(item)
+  File ""/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ast.py"", line 241, in visit
+    return visitor(node)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/prov_definition.py"", line 32, in generic_visit
+    ast.NodeVisitor.generic_visit(self, node)
+  File ""/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ast.py"", line 251, in generic_visit
+    self.visit(value)
+  File ""/System/Library/Frameworks/Python.framework/Versions/2.7/lib/python2.7/ast.py"", line 241, in visit
+    return visitor(node)
+  File ""/Library/Python/2.7/site-packages/noworkflow-0.3-py2.7.egg/noworkflow/prov_definition.py"", line 62, in visit_Call
+    self.calls.append(func.id)
+AttributeError: 'NoneType' object has no attribute 'append'
+```
+
+",closed,JoaoFelipe,[bug],2014-08-08 02:52:12+00:00,2016-02-26 21:33:46+00:00,2014-08-26 18:46:13+00:00,
+16,Argument overlap bug,"Noworkflow tries to read the script arguments as being its own arguments.
+
+Code:
+```
+# argv.py
+import sys
+if __name__ == '__main__':
+    print(sys.argv)
+```
+Execution:
+```
+$ python argv.py -c test
+['argv.py', '-c', 'test']
+
+$ now run argv.py -c test
+usage: now run [-h] [-v] [-b] [-c {non-user,all}] [-d DEPTH] script
+now run: error: argument -c/--depth-context: invalid choice: 'test' (choose from 'non-user', 'all')
+```",closed,JoaoFelipe,[bug],2014-07-05 20:38:55+00:00,2016-02-26 21:35:00+00:00,2014-07-05 20:41:03+00:00,JoaoFelipe
+15,fix minor typo,"Just saw you mention this at UW, looks interesting!",closed,benmarwick,[],2014-05-08 19:09:07+00:00,2014-05-08 19:25:07+00:00,2014-05-08 19:22:47+00:00,
+14,Collect environment provenance bug,"I tried to run in ubuntu, and I got the exception:
+
+```
+~/data_mining$ python ../noworkflow/capture/noworkflow/now.py  run id3.py 
+Traceback (most recent call last):
+  File ""../noworkflow/capture/noworkflow/now.py"", line 59, in <module>
+    now.main()
+  File ""/home/joao/noworkflow/capture/noworkflow/now.py"", line 54, in main
+    args.func(args)
+  File ""/home/joao/noworkflow/capture/noworkflow/cmd_run.py"", line 43, in execute
+    prov_deployment.collect_provenance(args)
+  File ""/home/joao/noworkflow/capture/noworkflow/prov_deployment.py"", line 80, in collect_provenance
+    environment = collect_environment_provenance()
+  File ""/home/joao/noworkflow/capture/noworkflow/prov_deployment.py"", line 18, in collect_environment_provenance
+    environment[name] = os.sysconf(name)
+OSError: [Errno 22] Invalid argument
+```
+
+The bug is in the function os.sysconf(name). (https://github.com/gems-uff/noworkflow/blob/master/capture/noworkflow/prov_deployment.py#L18)
+It only occurs when it tries to read 'SC_EQUIV_CLASS_MAX' or the code 41. All the other values of os.sysconf_names are fine
+41 == os.sysconf_names['SC_EQUIV_CLASS_MAX']
+
+
+
+",closed,JoaoFelipe,[bug],2014-03-25 23:17:04+00:00,2016-02-26 21:35:00+00:00,2014-07-05 20:41:03+00:00,
+13,Strong Links,http://dl.acm.org/citation.cfm?id=1876071,open,braganholo,[related work],2013-09-06 18:09:24+00:00,2013-09-06 18:09:29+00:00,,braganholo
+12,Sample pipelines in Python: Rosalind,http://rosalind.info/problems/locations/,open,braganholo,[],2013-09-06 16:37:53+00:00,2013-09-06 16:37:53+00:00,,
+11,Python prov,"A suites of Python modules for encoding, tracking, and storing provenance assertions",open,braganholo,[Library],2013-09-06 16:06:08+00:00,2013-09-06 16:06:08+00:00,,
+10,Git in Python,http://pythonhosted.org/GitPython/0.3.1/index.html,open,braganholo,[Library],2013-09-06 15:51:23+00:00,2013-09-06 15:51:49+00:00,,
+9,Wanted: An Entry-Level Provenance Library,http://software-carpentry.org/blog/2012/10/wanted-an-entry-level-provenance-library.html,open,braganholo,[Library],2013-09-06 15:49:59+00:00,2013-09-06 15:53:18+00:00,,
+8,Provenance,http://software-carpentry.org/v4/essays/provenance.html,open,braganholo,"[Library, related work]",2013-09-06 15:49:35+00:00,2013-09-06 15:53:51+00:00,,braganholo
+7,Pyprov 1.0.1: A Python implementation of PROV data model,https://pypi.python.org/pypi/pyprov/1.0.1,open,braganholo,"[Library, related work]",2013-09-06 15:48:31+00:00,2013-09-06 15:52:24+00:00,,braganholo
+6,Data Provenance with GitPython,http://penandpants.com/2013/04/25/data-provenance-with-gitpython/,open,braganholo,[related work],2013-09-06 15:47:17+00:00,2013-09-06 15:47:17+00:00,,braganholo
+5,A Python Library for Provenance Recording and Querying,http://link.springer.com/chapter/10.1007%2F978-3-540-89965-5_24,open,braganholo,[related work],2013-09-06 15:46:08+00:00,2013-09-06 15:46:08+00:00,,braganholo
+4,ReStore: Reusing Results of MapReduce Jobs,"Proceedings of the VLDB Endowment (PVLDB), volume 5, number 6, pages 586-597, February 2012
+https://cs.uwaterloo.ca/~ashraf/pubs/pvldb12restore.pdf
+
+SIGMOD DEMO:
+https://cs.uwaterloo.ca/~ashraf/pubs/sigmod12restoredemo.pdf",open,braganholo,[related work],2013-09-06 15:43:39+00:00,2013-09-06 15:43:39+00:00,,braganholo
+3,Sumatra,"Paper: Automated capture of experiment context for easier reproducibility in computational research
+http://andrewdavison.info/media/files/reproducible_research_CiSE.pdf
+
+Implementation: https://pypi.python.org/pypi/Sumatra
+
+Slides: http://icerm.brown.edu/materials/Slides/tw-12-5/Sumatra:_a_toolkit_for_provenance_capture_and_reuse_%5D_Andrew_Davison,_Centre_National_de_la_Recherche_Scientifique_(CNRS).pdf",open,braganholo,[related work],2013-09-06 15:41:56+00:00,2013-09-06 15:50:51+00:00,,braganholo
+2,A Universal Identifier for Computational Results,"Stanford work
+http://www.sciencedirect.com/science/article/pii/S1877050911001256",open,braganholo,[related work],2013-09-06 15:39:52+00:00,2013-09-06 15:39:52+00:00,,braganholo
+1,Find a Python database to store the hashes and execution results,,open,braganholo,[],2013-09-06 15:36:45+00:00,2013-09-06 15:37:05+00:00,,braganholo

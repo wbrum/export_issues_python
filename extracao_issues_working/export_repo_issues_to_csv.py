@@ -22,13 +22,13 @@ def write_issues(response):
     for issue in r.json():
         labels = issue['labels']
         for label in labels:
-                csvout.writerow([issue['number'], issue['title'].encode('utf-8'), issue['body'].encode('utf-8'),issue['state'], issue['created_at'], issue['updated_at'], ' '.join([label['name'] for label in issue['labels']]), issue['user']['login']])
+                csvout.writerow([issue['number'], issue['title'].encode('utf-8'), issue['body'].encode('utf-8'),issue['state'], issue['created_at'], issue['updated_at'],issue['closed_at'], ' '.join([label['name'] for label in issue['labels']]), issue['user']['login']])
 
 
 r = requests.get(ISSUES_FOR_REPO_URL, auth=AUTH)
 csvfile = '%s-issues.csv' % (REPO.replace('/', '-'))
 csvout = csv.writer(open(csvfile, 'wb'))
-csvout.writerow(('id', 'Title', 'Body', 'State', 'Created At', 'Updated At', 'Labels', 'User'))
+csvout.writerow(('id', 'Title', 'Body', 'State', 'Created At', 'Updated At','Closed At', 'Labels', 'User'))
 write_issues(r)
 
 if 'link' in r.headers:
