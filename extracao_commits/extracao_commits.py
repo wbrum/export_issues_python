@@ -29,12 +29,12 @@ def run_csv():
 
     # baixa issues e transcreve para csv
     git_commits = github.repository("gems-uff", "noworkflow").iter_commits()
-    for git_issue in git_commits:
-        print git_issue.commit.message
+    for git_commit in git_commits:
+        print git_commit.commit.message
         commit = [
-            git_issue.sha,
-            git_issue.author,
-            git_issue.commit.message.encode('utf8'),
+            git_commit.sha,
+            git_commit.author,
+            git_commit.commit.message.encode('utf8'),
 
         ]
         output_csv.writerow(commit)
