@@ -1,0 +1,448 @@
+sha,author,message
+a50366222023ca3e8d50c5dfa2cfffbe536f68ea,JoaoFelipe,Version 1.6.1. Fix usage rule
+b065b71a02c4079072b2542ced730777dfaadab0,JoaoFelipe,Dependency rules
+c3f7ea289c6f4cda2959416e93f06fb4c89a950c,JoaoFelipe,Version 1.6.0. Fix prolog and dataflow. Append is not a read mode
+7bcca9037ecb6ec39f99d2e51cafb6167518d30c,JoaoFelipe,"#107: add command now schema, and magic now_schema. Both have options to present the schema textually or to export to dot in a graph form."
+c0934d9142bf203e77fd312e61924393221447a1,JoaoFelipe,#103: use atoms to represent strings
+2e2d15a09ec138fedc35aac77e2fe87b71dedcb4,JoaoFelipe,#103: Add descriptions to all rules. Change underscores to CamelCase
+b6f5279abf1dbbc5071dcfeefa8f1d8d7b2cbcdb,JoaoFelipe,#103: Use CamelCase for variable descriptions
+3cb4a0ded2600176194c59d33165d1780aa0e27e,JoaoFelipe,Version 1.5.2. Fix prolog export types
+5d882430c74968ab29bc2c06e3e69848a8b4b07e,JoaoFelipe,Version 1.5.1. Fix bug on dataflow graph with yield
+586955aa6cf495f2e8d1989bfcd97c0be4a2f377,JoaoFelipe,Version 1.5.0
+439c53c5877f214d300124ddadcc4c853642e710,JoaoFelipe,"#102: export modules, environment attributes,  objects, object values, and tags"
+4d73128cafc8804cf6c4ad39f1524951ca822aa5,JoaoFelipe,#101: Collect docstring; improve trial export; export function definitions
+19c996f384c5e9e0e67a77d3faea4f6d0bebb95e,JoaoFelipe,Version 1.4.6. Remove -b option from export; Fix usage_or_assign rule; Fix unhashable UniqueFileAccess
+5b9885526f415f34c5962b99d408b48b236d56f0,JoaoFelipe,"Version 1.4.5. Show file accesses outside clusters, configure name length, add option to hide access to external files, and fix dependency representations to arg variables."
+a5772978d5f7ab7d6bae1426290ad70f22feaf92,JoaoFelipe,Version 1.4.4. Add option to combine file accesses
+e07a588522b8e4eb6299885aed0e81cfd9bce681,JoaoFelipe,Fix arrows for repeated files
+bc14f4fa43a90810570df18081090c561b3edf3e,JoaoFelipe,Fix exception on slicing
+6e831c74398d105cda7b48131150fbbd3f79c3c6,JoaoFelipe,Fix performance issues with now list and now history
+ad08a73c77f055b7e57f9b03c95415eb374dde35,JoaoFelipe,"Version 1.4.3. Fix slicing, restore and ipython bugs"
+272b037904d83c1d4f90c7f489e2c18a0ae4936d,JoaoFelipe,Version 1.4.2
+f6842cad62db3dba17bce42c68683d8051059cce,JoaoFelipe,Fix prospective graph
+bb2cead746a869f171027edf372947be425cd9f3,JoaoFelipe,Version 1.4.1
+59ad052168190238315f8e3508c61a79a652a5d1,JoaoFelipe,Help messages
+f8b53d363e6e9e88bbe2a63f1942380304a7f14c,JoaoFelipe,Happy Numbers Experiment
+577260b6d67a7f02276528d21278f8ddb2755b0d,JoaoFelipe,Version 1.4.0
+ab86806853516757a741cfb6ee9c07a0815f7401,JoaoFelipe,Fix rank on prospective graphs. Add dependency graph
+6292cea80e6c0fd7ce87b9ebf90a2b01c1fbaa07,JoaoFelipe,#96: hide internal use
+76e06689db9bfa230a7624c9469236afc3a5e5ea,JoaoFelipe,#95: prospective dataflow graph
+a1b8367254acaf3efcc4e522092114e339a1f30c,JoaoFelipe,"#95: dataflow command configuration, show file accesses, show values"
+68714f3c2b1814320443a6601397f3190a1f6a54,JoaoFelipe,"#95: dataflow command, fix speed issues, fix collection"
+9efe4cc5e28f9e8312bb9a2994570f617cdfa811,JoaoFelipe,#87: restore a single file
+1cf3879c677173d8a689a5fd2fc79c972846fe7c,JoaoFelipe,#88: remake restore operation to include all accessed files and to create backup trials when any of them changes
+76146c753e42b1182fe674354325577e7c5d7803,JoaoFelipe,Option to select steps on demo run
+96063006608a603e335ef9ca1e920a40ddb2108b,JoaoFelipe,Version 1.2.0
+291880aba345a88ae2a0fb4663ea49e85e7e86c2,JoaoFelipe,#89: use the script name instead of <main> on diff if both scripts have the same name
+672b8f4c1aa7a6065155814ddb0c1c86301b463b,JoaoFelipe,#89: rename _handle_fromlist to import name
+4d7c2e78cbf49d4436e469ae62c786cd883a3e75,JoaoFelipe,#92: Alias for Tracer command
+ba5241533ceeb6e9738548bffd3ee6077145f416,JoaoFelipe,#94: fix while loops and return conditions
+8852e7f7a99976d11b0d6f942112804b54643552,JoaoFelipe,Prepare rank
+747d8aeef87db1566a0ac2c8994cd513e127936d,JoaoFelipe,#94: fix for loops
+1bd20c1223559ab9c19c984c9659046a797f83c4,JoaoFelipe,#93: summarize dependency graph
+e4907c5790fd971fd43dc81ff5a21d603ecfc992,JoaoFelipe,fix #91 #90: rename slicing tables and store variable and dependency types
+5a361c499680ee2c32ed8960c2d10e32fa074580,JoaoFelipe,Setup classifiers
+4c345050e1358a571696aca051d7cabeee97c77f,JoaoFelipe,Prolog rules
+4b52e1835a11b2c49d86aed56220fd2b27e2fff6,JoaoFelipe,Bytecode transformer
+9dd161a4527c772863e4a97f514da66941874f61,JoaoFelipe,Brief diff
+9c42b77f0e4565bdd6474a4e8db0ca6dafb56170,JoaoFelipe,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+d53ebbc25e4ca1430f1e66a2f49424eeba3f0e9f,JoaoFelipe,Version 1.1.1
+42dfb14c74b0256c2a56c4bb3a85ca457ab42639,JoaoFelipe,Add Graybox concept
+6b65bfc85ea4ec9f836708f8dbc84dad0a2ffa35,JoaoFelipe,Fix demo 2
+3dfb0492858bfa31ea0428f08654f9d664c503bc,JoaoFelipe,Capture black-box
+9194504d4aa8bbd7b0dfedf9c6710ae789c1aadb,JoaoFelipe,#86: fix depth configuration
+ef9c4db92e5c554fb16cb173beb5d9fd7559d0d4,leomurta,Adding a dummy test file to allow visualizing only the main script
+7c96ae0ddaf169ec3ef202f82feafe5be1beb15c,JoaoFelipe,"#85: Version 1.1.0. export dot; show prolog description; include demo 3; 
+present trial.dot on jupyter notebook; 
+move --ipynb (-i) option to show, diff and history commands"
+a70b34814af806f3cb9a5b88e551bdda39cca139,JoaoFelipe,Fix #80: sage get calls. Version 1.0.3
+1c827eef88c63c284ba0166d25bdb2168904e90f,JoaoFelipe,Version 1.0.2
+bdb0b41be85e2f569f5138b345a31bf9967f648d,JoaoFelipe,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+1e3a0119df0df70e02e073225d8a19c0bf5a5ecb,JoaoFelipe,Version 1.0.1
+429cc30eb9312703e333d60d5ac8ac4b4d9b2ff7,JoaoFelipe,"Fix #79, #82. Better messages for runs without parameters"
+b8ae580eadb145ddda172f7dca2133e713ef30ac,JoaoFelipe,"Fix some program slicing issues #78, #61"
+05103aaddfd55dda485064691c83e2498abe815e,leomurta,"Update README.md
+
+Adding instruction about how to upgrade noWorkflow"
+a9085c665bdf5005e69462be6b949fca4222d155,JoaoFelipe,Support await and async from Python 3.5
+8dc57f6f6cebc205a51a8d459e54c948ace4e442,JoaoFelipe,Lint utils and vis
+a6f6205e995ecd1833e00a73a553e9e9da59b30f,JoaoFelipe,Lint ipython
+5ab73f6d2b75254569d67c28478e31e0b847dc78,JoaoFelipe,Lint collection
+ae8150a8a0ddf7fb6ec8d49a1f2c32eb9c76163f,JoaoFelipe,Lint cmd
+0e8a5cb7d3a496da8e9a37d97f6538311febc3ce,JoaoFelipe,Lint persistence
+2cdc68d8ce3ea505d650767269eba3af038ffba8,JoaoFelipe,Refactor models to join Model and Proxy class and create Prolog description
+3a5e8034de1686028caa2a5fb0970d46e32b0f2a,JoaoFelipe,"Merge branch 'master' into sql_alchemy
+
+Conflicts:
+	capture/noworkflow/now/cmd/cmd_list.py
+	capture/noworkflow/now/cmd/cmd_run.py
+	capture/noworkflow/now/models/trial_prolog.py
+	capture/noworkflow/now/persistence/models/graphs/structures.py
+	capture/noworkflow/now/utils/__init__.py
+	capture/noworkflow/now/utils/consts.py
+	capture/noworkflow/now/utils/functions.py
+	capture/setup.py"
+3d0d8540b3e5fe2de6ef3c60c33a68d173edb89f,JoaoFelipe,Use native_decode_source from PyPosAST. Merge master
+98f6bd583a939a471bb29ebc580af7a95b1bb2da,JoaoFelipe,Lint
+226fcf31bbeac47dee4a82f4a6be82a373548698,JoaoFelipe,Fix tests. Remove old code
+5c7425808bdd687b6eac16d37785f8eae47c3991,JoaoFelipe,#72: Python 3.5 support
+c91319463ccdb65a11115f6300f4a45f4644c1e1,JoaoFelipe,Show noWorkflow version
+d179393cf59045b58dc1775fdd5e29bbb5f60f67,JoaoFelipe,Simplifying proxy. Both Python 2.7 and 3.4 are working
+d0774004e6de4e673c0dc9c2d39b3edf55c3f9d2,JoaoFelipe,Reorganize packages. Python 2 seems to be working
+c6201b1cfdd45ea5aa0b35bed0046810638444a6,JoaoFelipe,Store definition and deployment provenance with sqlalchemy
+1f18bdcb7286b27b5e20eeb2d495e2d9022c020e,JoaoFelipe,Store execution provenance with sqlalchemy
+80b185630f5a5998b93805e056f1548ea5086fde,JoaoFelipe,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+851d05fee743c725eb2ea968b697510af2513698,braganholo,Including link to videos on the readme file
+2664132d5743658e749face092324fccc24a2181,JoaoFelipe,Now vis
+9df730e181684735711a756b813f616d9ee0c997,JoaoFelipe,Show duration on list
+ad51786dcdd754a5697786ee5c2700fef86d2dd6,JoaoFelipe,Starting to refactor persistence
+4626f0749c322ab26d11a7c3fb2d275f9872978d,JoaoFelipe,IPython SQLAlchemy
+d94db37f0c1a514027e7c79aebfad912eea80085,JoaoFelipe,SQLALchemy Proxy Models
+b156e447eb40431a62ecef443bdc4a971d13a4c7,JoaoFelipe,Trial queries
+6604292cf4e2b2f7a0354edbf9b8501ba067da65,JoaoFelipe,Update history model and graph
+0eab123ef57d272778ca349501fae40d53dd262e,JoaoFelipe,SQLAlchemy models
+c66dfa865ba495da0f0625983996e492be8209bb,JoaoFelipe,Add sleep to simulation. Version 0.15.3
+da46bf49b4d051e2c1adee1e2e4699a2861efe51,JoaoFelipe,Fix format for datetime without miliseconds
+65e28f54491635da8cdfb382c37077c3a44bb7ef,JoaoFelipe,Version 0.15.1
+7ab69c8ebbe7e9b404a7d5b6d78fad02e8eab9c8,JoaoFelipe,#71: fix demo. Version  0.15.1
+77252be98bf5a6f32caacf0b87d87d775c1c685e,JoaoFelipe,SQLAlchemy models
+ff9a945bd6461a7c163b52d38a889cfa04d5efcd,JoaoFelipe,"Fix readme, setup.py, slicing.
+Add support to run through python -m noworkflow.
+Version 0.15.0"
+7bb9a808ca101e263b01203a34577895c95649c6,JoaoFelipe,#71: demo command
+9b02daaaca6acf978650d29ed0d331caa5fff14a,JoaoFelipe,Version 0.14.0
+90d207dd813b75543e52a13e326ec5972eca8d43,JoaoFelipe,Merge branch 'gdse' into cm
+9058e3f6d04685d8f3d647fe3d57625414518da5,JoaoFelipe,Version 0.13.0
+35ac727c0c023dd359121c3a66a26a42e9fed13e,JoaoFelipe,#70: fix prolog retract
+0c796e14b4e47c88a4c656b032720603639f807b,JoaoFelipe,#33: use tag to load trials and diff
+367f1634132e05cd228126335d4a78bc19e4edad,JoaoFelipe,#33: Create autoincrement semantic versioned tags for trials
+3cfe8dc34ed8c0ba83a38cda474b9216f1cabe2b,JoaoFelipe,#70: show slicing variables on $ now show command
+f82059e233274e57e782914e1544f6c3cb24fca3,JoaoFelipe,#70: export slicing to prolog with link to function activations
+7dbfd0c3b0c47508391255aaeeac01f9e0896c1a,JoaoFelipe,#70: Show slicing variables on activation graphs
+0a6692ff51d00fdd0ceea492f694987c86f7dd0e,JoaoFelipe,#70: Link slicing variables to activations on collection.
+333cbe274348428f1a9514fe81406f8416036845,JoaoFelipe,Release 0.12.3
+a3c3d2713672521c1783dee154dcd04b411e2417,JoaoFelipe,Improve performance
+a248562487d404c33108bf0989547d414e497894,JoaoFelipe,0.12.2 Release
+ad9d5d0fc7090f5e385c79fb77739c3222b9920d,JoaoFelipe,Optimize execution. Remove unnecessary lines
+2d539f7416de31fba3c7262ebb5fdb4041d90fe2,JoaoFelipe,Change serializer
+3f4c51c74f35b059c7d92a2fce1d9a1eee065264,JoaoFelipe,Release 0.12.1
+70d9780f17537861125d87c14ecc353b1a7bea72,JoaoFelipe,Fix Profiler bug
+fd590317d2e1f7fc027dbb3246027ffa41b2c91d,JoaoFelipe,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+61ef9e51d9f681512081de2cedbddceba1ddc41e,JoaoFelipe,Release 0.12.0
+fa54c282d7850a8b7e5b2d6aa8b1bb1f01eced6e,JoaoFelipe,#58: Add 'now debug'. Change trial to load last id by default
+19c19d2e2b0fc70098e20e68cf8dd793e8cfa6ed,JoaoFelipe,"Fix run, fix restore magic, add metascript class, add partial save frequency"
+bbf02b1d4e94de8c3aa6e8c5b4d297ce2e3d30fb,JoaoFelipe,"Split bytecode file, create cross version 'dis' module. Fix Python 3 profiler"
+fd4085cfa8429c5ba2491cb3e9976b7abd79dad5,JoaoFelipe,"Merge pull request #67 from remram44/fix-readme
+
+Fix README.md"
+ea181f73c77a031a787f9e8dee0474a1193e41f0,JoaoFelipe,#58: Invoke any debugger with noWorkflow
+84e6b715fb5be837e43ffcfc1c1a2ed15157422f,JoaoFelipe,Fix output redirect and create docstring for cmd and graphs
+1448a2016da4bb666faa162c07999a0d22c5e60d,remram44,Fix README.md
+5c6a896bbf2280856922fdf30691ae319530686e,JoaoFelipe,#58: Add command to open now vis inside the debugger
+4c1af4aee317af3a72c728894afd66389414343d,JoaoFelipe,#65: Support partial visualization
+d237a5bf77ebb659b5cf095be0002de83db85804,JoaoFelipe,#65: Create partial save function
+8042daf7de04e8d2fffd7ffe805ef8945cd94b77,JoaoFelipe,"#63: Process id for activations, file_acesses and object_values"
+fc38fd685a84d64c2d10acf8235812bcdb87b58e,JoaoFelipe,Fix version numbering
+e24696599213b04362fcf343a14b1d6f5a010ad4,JoaoFelipe,#42: Detect variable usage during Del operation
+7bce810127ed1a9496ead22298d8ee60d564940a,JoaoFelipe,#37: fix yield bug
+a70b88aa31e1245f8495b1bd320f148960bdcc42,JoaoFelipe,"#20, #59: Improve depth configuration  and fix With slicing"
+8bbd8d8dd56d1a4043c15ee3e05b12bb4ef1b45f,JoaoFelipe,#20: improve depth configuration
+932dec8dd4a0aee0de0ff97d2bc12862df9780b2,JoaoFelipe,#58: Invoke debugger
+d6af33d1a93816568c26c97c121d303c1c6737d1,JoaoFelipe,Fix now vis loading icon and description
+e9436873699aebd1e7552fe5eb2eae865bb67bda,JoaoFelipe,Using 2to3 to reduce number of incompatibilities between python 2 and 3
+d0ba47caca1935f822996a1c707df496a348d87f,JoaoFelipe,Fix module capture in Python 3
+d279f7e8889d44d718070982868ca6d91725c96b,JoaoFelipe,"Version 0.11.1
+Fix python 3 bugs, add optional instrumentation, fix module diff bug"
+9eaa81b97abe8731f10e6674b4945dbfbf4c9775,JoaoFelipe,Update readme
+01afe3bfd6a1befedaa09c9be71c4954c3a50d17,JoaoFelipe,#57: Add prefix to access fact id for disambiguation and add TaPP paper to readme
+58a2b5fc6f598c123764c03cc0f208b6fba91509,JoaoFelipe,"TaPP paper, poster and examples"
+73bfb0fd2ecd5198a38342e2ada4a61b9462f12a,JoaoFelipe,Magics for SQL and Prolog Schemas
+b3a8cf17f11192c33772506685b0e898e5e27153,JoaoFelipe,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+00001e823e608ae46b17faaddda015f7b9b88171,JoaoFelipe,Find module in trial
+546ed38f4d98b10f06831c9dc1af66f4eb72108b,JoaoFelipe,#56: interactive mode
+34f8c687b15cedef39e5afbaafc93d62b23d7445,JoaoFelipe,Fix module messages on deployment collection
+ae43aa9735a643198f6877cc140e924042bc5fcb,JoaoFelipe,Fix globals and open
+573c30dfdae96d341a8625d0e53e2fdb3ce0c75d,leomurta,"Removing ack to JetBrains, as we do not use PyCharm anymore."
+3b2d3dcd2c48147c0de1ad3235aa22c45f0b0407,JoaoFelipe,Diff edges. Calculate time to generate diff. FIx graph size setup. Button to hide part of activation name when it is the main script. Replace ctrl click
+07936823cec9f8302d3f4be6d34b182584a92c42,JoaoFelipe,Version 0.10.0
+f241e91454891476752976fbd382670863280a90,JoaoFelipe,"#49: Small fixes, docs, ipython notebook"
+20a4639406aa70e9a13bf9a02d457257b064a25b,JoaoFelipe,#55: loading icon for ajax operations
+4f1aee425632552873d27778418c2786c9db5ca5,JoaoFelipe,#49: Time limit for vnd. New now vis interface. Browser history navigation
+94c04d1c2902832c37e30e3bec73140d8ebd962d,JoaoFelipe,Fiz activation graph edge count bug
+3e5c534827b1eefe26948d57dda98ca2e6844d3e,JoaoFelipe,#49: use vnd for matching graphs
+0b8602c6087209d53740e6ee6d2222f9041a6c63,JoaoFelipe,Fix activation graph bug
+a09aae0c76041f4f7ee4d37e4ad4ed473d3c7783,JoaoFelipe,#50: cache activation graphs
+7a291ac8ca6d983f4622f0f272d1f6d5af0d3181,JoaoFelipe,#49: Refactoring diff graph and creating a function to calculate the similarity of a mapping
+4bdffb70e5336cf1cfdbf7983f161fd7fb4dbdb6,JoaoFelipe,#50: refactoring trial graph generation
+e21e1f140fd8ee8fab0256fd16dc1cb6705fa55c,JoaoFelipe,Changing graph
+6322525f67d4066eccd6b8acc5ed20117384490a,JoaoFelipe,Fix diff color
+5e382c3869dd21a78775172751ab8448bf8ed75f,JoaoFelipe,#48: fix definition provenance collection. Using variables to load definition provenance during execution instead of loading from DB
+97005bf9eec1e4f3181c7686a00c1ff39f183637,JoaoFelipe,Fix restore and export
+ec04a35a8453190ea86331e54132799fdedc2d28,JoaoFelipe,#47: fix __ini__. IPython is not required to run noWorkflow
+9581b46e158eb827b10ee5a34e03321f844b91ad,JoaoFelipe,Fix Python 3. Release 0.9.2
+a0389e8267c3034203a05af6e03b122e0e771bf9,JoaoFelipe,"Python 3, docstring, tests"
+0a40f05991be88650d64a1067e6eb743d73b83df,JoaoFelipe,Analytics and fixing python 3
+2bdae510c86c7c58b5f98a0892a17ae876d1f07b,JoaoFelipe,"#46: expand variables for queries, fix tests"
+72b571869b83c1793f687eeae691deff362f8ba9,JoaoFelipe,#46: formatters and line magic now_ls_magic
+a377ddc1ee664b03d93f5904bb73a9208daef885,JoaoFelipe,#46: now_restore line magic
+10197f4f67fa3ae6e985046b0ae51e3b1d4dcca2,JoaoFelipe,"#46: creating now_set_default line magic, now_sql cell magic, now_prolog cell magic. Refactoring ipython module"
+70af6de023a4bea0fc13db841ad8bdd33862862e,JoaoFelipe,#46: js lint
+091f163de3f89575d94d83381de3d1430f966b47,JoaoFelipe,"#46: model superclass, default parameters for models, unubtrusive javascript"
+ad84317435677094cbaf6279bd23287eb5b33dbb,JoaoFelipe,#46: Readme
+674799d0bd5e00e9237753a73987e3cd4faeea09,JoaoFelipe,#46: %now and %nowip magics. Fix on the graphs to use _repr_html_ instead of display
+7653b9b4b352bfef381b36fc92ef02ddf46c99ec,JoaoFelipe,#46: ipython magic similar to %%script
+fcc8ec9d6aad663b5c4ad5623e7475a237bd44f1,JoaoFelipe,#44: parameter --dir to select directory
+f1b8aaa28610dc5f957966574abfd301355541ee,JoaoFelipe,#45: Rename checkout command and files to restore
+4a1547793b2bd6b680d326745cc827e4f54e9f67,JoaoFelipe,Change sequence arrow color to blue
+ea438ca899e09c82b102847ace5ce0662c64dc79,JoaoFelipe,Fix return and non assignment dependencies
+bf8190f9699238c956bea613a629a0b171be7edc,JoaoFelipe,"Fixes #43 and many other syntax issues:
+- Use pyposast to get ast node position
+- Create definition object to use instead of the  visitor.
+- Sort disasm lines to match global call_function list
+- Support call_function from decorators, generators and asserts"
+0ed57a3f86233982c11a53d5a413d4a6051d4dea,JoaoFelipe,Release version 0.7.0
+1258d77cffac0d4866a4f10285da16b07dba8e48,JoaoFelipe,Fix function line extraction
+24ca6ce2455b4a0010767123e4d55dea7500a274,JoaoFelipe,#40: export diff
+be46f7c57de2dbeaa8d86e5edee15b9fcb52e43e,JoaoFelipe,#41: fix syntax error on python 2.x
+58303c89ca1710b8c13dc4f6f57a8c4f6670bb95,JoaoFelipe,#40 : diff graph
+3ca6358ce045d495c8e2c383b8374b424eb19861,JoaoFelipe,#40: update prolog rules to include trial_id
+1216c0f436085322762bb9c450f6355dc0ae8207,JoaoFelipe,#40: export ipython notebook files
+4eac2efe5cf54be39462c45cc6c731439f5d3df8,JoaoFelipe,#40: update readme to include a link to a newer version of pyswip
+42ed6117fd2f1f4cd42209efbc2643043b56ceae,JoaoFelipe,#40: trying to add prolog support
+52d135d3ee40664d7a23c42bf9027cf2e189cdb2,JoaoFelipe,#40: docstring for trial. set graph size. more information on history tooltip
+6f816f6423ec395e6b64a8bb260678d44cf88fdb,JoaoFelipe,#40: load history graph on ipython
+9a25a1dc2327a8121616d97f95823d90d0e28a3c,JoaoFelipe,#40: tooltips for trial graphs on ipython notebook and loading graphs without having to share static js and css files
+01f171967effc03432b49bf1128964fa115783ca,JoaoFelipe,#40: Load trial graph on ipython notebook
+4ee7ebe9350b79993b7eb05388beb10ec16c36b4,JoaoFelipe,#26: bdist. any python version distribution
+285784ef77cfe263e3bbdbee4ab8340f8b6c11de,JoaoFelipe,"#26: python3 support, pep8 formatting, copyright messages, test and installation fixes. 0.6.0 release."
+7f44396770bfe74fabab80b9f0ad699d661a055a,JoaoFelipe,#24: lcs diff over graph instead of activation tree structure
+d7f4ea823001d7f7f8ae96331b0b149c259e8284,JoaoFelipe,Just combined graph for diff. fix file access diff
+601152c82690f87ff8acba5967ad14ca7aef91c7,JoaoFelipe,fix graph duration and colors
+9849bb9a8b982e487d69c5d890142f11e3e5c118,JoaoFelipe,"fix setup, match features described in paper"
+9e60e9857b541943479082958a69c1cbbc16e92f,JoaoFelipe,#24: graph diff combined
+37b67c4c3a71df1b6ba4eaa85bd109486d06d896,JoaoFelipe,#24: graph diffs (exact match for now)
+8cf8c539bf8120cb9fa46abcbc5046609c2231b2,JoaoFelipe,closes #34: restore local modules
+732f0bcf09a55a6bf194022e5c6157a304dac8c2,JoaoFelipe,Refactoring persistence and vis models.
+059fb3d27c2cecc01aaf3427c53a742e244fed53,JoaoFelipe,#21: fixing history graph
+e5d26d2e8debe26a4d40672404ff8eb5d9f1d4c0,JoaoFelipe,#34: extracting load modules to persistence module in order to use it in checkout
+e4092c2112834157f9eb258a18ad1c6f97ce6dc2,JoaoFelipe,#21: history tooltip and status
+e2d8cd3ca9bd525238c8197d4867f4bab8ec6980,JoaoFelipe,#21: refactoring trial graph to use javascript object. Adding restore zoom history graph
+fe0cbb4987a3c14507cfaa0ac380385cf5618a29,JoaoFelipe,#21: creating now vis command and improving history graph to support multiple parents
+c6de0f7b7bba1e14d64d039268ae60713aeb390f,JoaoFelipe,#34: store parent version by script name
+8ae8be0c73a7a123e997434e7d6b2b9aedb78160,JoaoFelipe,closes #19: releasing version 0.5.0 with program slicing
+416e0aa032c6e62cb5418da0e4c6db346b073c65,JoaoFelipe,#19: prolog rules for slicing
+684e706ffcb3e686b27a3479ee6824b99dd3726a,JoaoFelipe,#19: export slicing to prolog
+1a170291488f22afd80d02caf6101364c72d1247,JoaoFelipe,#19: fixing some capture issues and trying to improve speed
+548c5a607a1c287659dc58da1983d1fc2007a149,JoaoFelipe,#19: store value and time
+fc2882b0b55043c756ab57543bd30fd6f244387a,JoaoFelipe,#19: Storing slicing
+f661649d8df94c2474ebe0727179449b4e9c557d,JoaoFelipe,#19: capture usages
+c3657e89f3382897bba3f0350ad9f54214ac1909,JoaoFelipe,#19: capture inter dependencies between params
+e45b64ccf422711c317175b870fd128e22e056d5,JoaoFelipe,#19: fixing capture for functions without return
+da40f5c4e89c73f89db3da8d400b2e7caa1b27df,JoaoFelipe,#19: capturing ccall dependencies
+053e8c8a473cd5cccabf381442d761f92b5868e1,JoaoFelipe,Extracting now and cmd package in order to fix relative import issues
+0e51061b4f9fc4e9ce9d7a36b06721ad3024ca49,JoaoFelipe,#24: show file accesses
+849667e8ff8b06dc115d90555abe3274c2a5b731,JoaoFelipe,#24: filter trials
+c68f2fe20b1a4fdf347095b6f520d4baa143abd4,JoaoFelipe,Fixed relative imports and setup
+8d9d39a039ad427788ece382cc907aa81288ec36,JoaoFelipe,Merge branch 'cm'
+ddd50e7f5c2fa2627c292b36d9ced51fc5def67e,JoaoFelipe,#24: enviroment and modules information
+e8701c5d2813b6304b3620d9eb371d35bf117569,JoaoFelipe,#19: test directory
+773ea4182657fa7ff198a5a117d10d01c6558704,JoaoFelipe,#19: fix tracer close activation
+953a592aae24fca45179d9518c1892cd176b5cd4,JoaoFelipe,#19: fix dis issues
+138174c8b83fed330a2c378bb0ecc92e5cf1c66c,JoaoFelipe,#34: restore trial script
+bd45331af4e04cd6298a1dd8c61651702b1db821,JoaoFelipe,#19: Matching function params
+a8c8b30b8068b15aaa0fef814e13e48f7f5b2e05,JoaoFelipe,#19: refactoring tracer
+9694a767a09601641b1116556882bf43f9bc913c,JoaoFelipe,#19: argument to show disasm and help debugging
+3c72a045f7690fe4a9d05ebbebf62bfbd5f83c79,JoaoFelipe,#19: extracting prov_execution module
+da0355c6b38e99e254bd8d7ce7b51c51f5f361d1,JoaoFelipe,#19: matching calls by f_lasti
+e390303375d1f96734e8bea9ebbb72fc1d88f3be,JoaoFelipe,#19: extracting prov_definition module. Using dis to collect frame.f_lasti
+0d64b83071f57c2ba2b049d53c736e777c56f10a,JoaoFelipe,#19: extracting prov_definition module
+15848c2963a18b4a29481ca1c19de07a7587d8b1,JoaoFelipe,#19: fix assignment lineno
+18477c6ce277a897e8a29ba6eed9839a1a02f56f,JoaoFelipe,#19: capture return variable
+7ae13e9b8f93fe1227b9bc10c871edae8d5e0b53,JoaoFelipe,#19: using both settrace and setprofile
+027879c82e30540f08ffe6aa46dce9feb3b9cb41,JoaoFelipe,#19: Capturing function calls
+16f70b1e1c862ccfd11d5a0acb2ebe3d5b90254e,JoaoFelipe,#19: Starting to integrate prov definition with prog execution in order to perform the slicing
+a935468d0cb90a556c0821e782a39e80f656f699,JoaoFelipe,#19: Extracting Activation slot class. It is supposed to be faster than dict
+f62ea1c460f7ae2387706cb825631d54564df8d5,JoaoFelipe,#19: Fix print message
+dd11c490b8b2857c72f4f0b39c14757630c8dcbf,JoaoFelipe,#19: Control flow dependencies
+b0b90773fd16049ae435b3272404474247b9fa2d,JoaoFelipe,#19: improving assignment left side capture
+b302866380c35f6f6d4e8b09df2aa1bbefcbb413,JoaoFelipe,#19: capturing complex assignments
+258568c33515e8c11466271113dff79cb63e7993,JoaoFelipe,#19: playing with tracer and ast
+3d0392a835f1b02ae01035d3cdb18d0d7e32f4a0,JoaoFelipe,Version 0.4.0 release
+92c8d53ce55791ab9963341eb6d5dcd6fcc87249,JoaoFelipe,#24: tooltips
+fb2b6c7d293558bc565931685b1de621a7ab810f,JoaoFelipe,#32: fixing function args capture
+ccd56fa8022c8d0070582b5c8608371ccda0e2aa,JoaoFelipe,#31: select between combined graph and exact match graph
+4c91dbc704f3dacc26fa271afba1a89b109d610a,JoaoFelipe,Merge branch 'cm'
+ae91d45398e2c1bed7dc75d5eb92eb7042a8f334,JoaoFelipe,Version 0.3.2
+a6076b1044d49bf711a036e8807f141a0eb2c8c6,JoaoFelipe,#30: function activation id sorted by activation order
+37514b5ea4e5b980e863ced89d61468b99334c08,JoaoFelipe,#29: Toggle nodes in trial graph with ctrl
+a3bc5e9d7bf62cec96823b8886f3e7a303320341,JoaoFelipe,Correct merging of sequences
+35181038d449bb434fbc31963e08fa3214916b35,JoaoFelipe,"Merge pull request #28 from gems-uff/function_within_loop_bug
+
+Function within loop bug"
+b283fbfd5d7ecc7da6e1c8b60ff082e870dac903,leomurta,Using namespace as key to uniquely identify function calls and flows.
+e04da2835bdc2f96674f419d6f650a59daf006e6,leomurta,Merge branch 'master' into function_within_loop_bug
+8171c3c8da78fe2f52ca7d57e9796024d809e866,JoaoFelipe,#27: fix first execution bug and starting to collect system environment from windows
+725f96b7b3b5e4eac6e87fb593a31ff2782a021f,JoaoFelipe,#24: trial graph working
+8eb355f83a219f552d4beb506570cffed5aa8e5d,leomurta,Considering only line number and function name as keys when composing the graph
+fec5c4cc42bbc50011865c859b30a49f07acd725,JoaoFelipe,"#24: Separating models from views, adding colors to nodes, aggregating nodes, adding labels to edges"
+ccf7bb0c5459bc4499fdf4e039657e86c57009d1,JoaoFelipe,#24: starting to develop nowvis
+9ac4b52742fc8db7910f7e51dc7ead82bba51856,JoaoFelipe,#18: Adding argument to fallback to InspectProfiler
+4f258d6aa3c00e04c6d7afef2dd68ec95642847e,JoaoFelipe,#18: Improving persistence performance by using executemany instead of a lot of separated execute
+07ec96b47a478fce2b5970b4d03fc74f9bff7b0c,JoaoFelipe,"#18: Improving performance.
+Changes:
+- Created a Profiler class to allow extensions
+- Removed global variables. Local variables are faster
+- Stopped using inspect.getargvalues"
+2e1a1d3cf4c6e73cabf1115f5c06aa85202543b9,JoaoFelipe,#26: starting to provide python 3 support. Using generators to improve performance
+d7016f8f3b99786c17b98bae335bc2c93e297ce1,JoaoFelipe,#17: using stack to capture function definition provenance. Adding global stack
+564157e2f76a7efafa7dae1a82ce8cf5958ce29d,JoaoFelipe,Issue #25: moving the dynamic predicate properties to the export facts
+ab883553486e73edcf039091eac2ec3225d639eb,JoaoFelipe,Changing version number to 0.3.1-dev to allow the identification
+04aae27f04a316e3620b49e6a3cc838e5fdcac7f,JoaoFelipe,Issue #25: adding dynamic predicate properties
+ea6ef1c56c2c5c5640a90e7dd53580fe8ecdd90a,leomurta,Fixing case.
+f694cdf54ac8cefcec3bc3ad670a6a36f99c157d,leomurta,Adding João Felipe to the team.
+d6a863e287fa4bcaeae44862916ec58dfd6b3ced,leomurta,Adding IPAW publication to the README.
+12d3517a279f07182b65128487c47a196451d932,leomurta,adding IPAW paper
+087bd9cb7a2b5d9ed6c5687d45ee78ef56f2e94e,JoaoFelipe,#16: Fix argument overlap bug
+c2ea6cec1a53fcc81fa0c7742d38e5135dbf41c2,JoaoFelipe,#14: fix environment provenance
+6fbb5649b7a13c38578fbc0abd0545151c94a5b0,braganholo,"Update README.md
+
+Adding ack."
+ec03e4fee92159a547317db82af28e99220a007b,braganholo,Fixing some remaining of the same bug.
+d299297623cd95275834d60e825f73da5880248f,braganholo,fixing a bug in the exported prolog rules
+e69c3e2156c5ce783568cf790de46780bccc6a68,leomurta,changing --depth-threshold argument to --depth.
+104c2edc7605bba0f751fe3d372cdbd058772531,leomurta,Fixing key collision in cache (map) when building the graph.
+db0dbbb59fc7c7135fafaf5fd1613e1fb27d6c45,leomurta,Informing the default value.
+af2e8f6d67347ffe7186a9f93f79181754a25ed7,leomurta,Adding support for defining depth and context to apply depth (all functions or non-user functions only).
+ba5fd9f4121de2ae2e38556ffb826b8e56a5f23e,leomurta,Removing unused library.
+8251e539da97179936dbb475ed233ea35d80d481,leomurta,Making eclipse setup more generic.
+4a6764d709757bff79639739531c9f1a6f8d5780,leomurta,fixing the setup file.
+18354c8ebbc578095b6568cd53452c27214b0005,braganholo,Creating indexes for foreign keys
+588d1890dc4e58ce7ab2068f1e482976fad51b3b,leomurta,"Merge pull request #15 from benmarwick/patch-1
+
+fix minor typo"
+4481a4b84d15e32b5a0341f1f14fc060a2c3d011,benmarwick,"fix minor typo
+
+Just saw you mention this at UW, looks interesting!"
+50827e2a937ee6a4fc304c9e6b7acb78ec90576e,braganholo,Update README.md
+2bd471364ceeb28044b7c8b1eba9439d7afe56e6,braganholo,Update README.md
+bbcb924416185305e1a9c312ccc2ac6605e8ee22,braganholo,Update README.md
+9d8884477f5b78ed4f739ea4cda5d7d32deb7b7d,leomurta,We are not using snakefood anymore.
+2e7b77fc12d509c4ffb17e1ae287015f31e7fff2,braganholo,Removing prototype directory.
+a0b23bbeada387cec1f3c9f0a8204c6b5522fa0f,braganholo,Changes on the example
+7c897ca93de5c181744db3f4dca206673bb534d1,leomurta,Refactoring command file names and adjusting imports.
+b4aa96a1244f5004061c4ec9a6cbfc1fd6fecd3c,leomurta,"Refactoring prospective and retrospective provenance into definition, deployment, and execution provenance."
+f914e3f593daa701390ec63f657f0718c2ba1fd4,leomurta,"Adding export to Prolog, with inference rules."
+d5d00227d27732d39a717735ddcfd8f350e90907,leomurta,Removing debug info.
+0a2317ea39b5a9d25a8194942ef76535a45da466,leomurta,Diffing environment attributes.
+088afe08cb4035e61a17461c61967b1dc8416cc2,leomurta,Diffing modules of two trials.
+38e5a31fa32dd1d0e62957d3bb8c56b4e500ea28,leomurta,Merge branch 'master' of /Volumes/leomurta/noworkflow/code
+88d4753c30842dc6f93201d1dc523cfaef5ad341,leomurta,Refactoring FUNCTION to FUNCTION_CALL.
+3457a6d4a66e7e60b1ebac5c2233bbe070eb2756,leomurta,Renaming function call to function activation.
+c33ed1e61e14ec912cf298af592293df554fa13e,braganholo,Changes on line numbers of the example script. Now it corresponds exactly to the example we are using in the paper.
+32387b4ade8790cfb366407c14971128b121a32b,leomurta,Normalizing modules capture.
+41e2fad39b434d0aa1e3c107d7b6975bec2b3ea2,leomurta,Sequence edges in grey.
+9f4d93f5bb0635d0774b9973a614ffbaa605e203,leomurta,Showing tooltip with duration in nanoseconds.
+ec6747d651f2b733393d16736b1b332f84622350,leomurta,Fixing the traffic light scale.
+1085d803f7991a206dd5d5b1a48e3ff620b12f7e,leomurta,Fixing the way date is read from the database.
+1a6d1b0b10624c614b18b3d4a8733f15e0d3e804,leomurta,Adding edge stroke and coloring vertex according to the execution duration.
+5ceb074330dc2777bb42909e7b2ae69b73d6e336,braganholo,Ignoring output.png.
+2afad307343c1a1642eb27a587902b67abf431b4,leomurta,Refactoring GraphFrame to be independent from NetBeans.
+dc5fda728c9b2f7becd5c579fc80269f344d2e36,leomurta,Using script path in the argument.
+780917c177102831684c73685b0e3c820ea92083,braganholo,First version of the visualization graph
+65a4eaaaa354856a23c7d64d4f55ac72423c4770,braganholo,Attempt to combine force and package layout
+bf620b6ba5f7d3335f8901b39cfdad579bd10c96,leomurta,Reading SQLite and populating Java models to visualize with JUNG
+bf80225249e1c1d0aaba8862f2fc61e50af0d968,leomurta,reorganizing capture scripts to accomodate visualization infrastructure
+c8c780125f6a4af5ecac53886bfc80edb952a372,leomurta,"showing file access. Finished the refactoring. Now run, list, and show commansd are working properly. The export command is still pending."
+6ad1cd702ce6e8c1390fa1917a9b4191a7bc1870,leomurta,accepting arguments for the script that will be executed and registering such arguments in the provenance store
+60cff78bc2374d7a04d0ad8ee86d4bc5bcb8c8c0,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+3612b32c73f220cf7ee446656ce83fbcf6b2de80,leomurta,registers global values
+a73d49019c26acd2a19abbbd439331a20f54aef7,braganholo,Change on the weather example
+39ad814f427d5d13958e4e281fe43f97a9c03b68,braganholo,Tests for trying to group function calls
+02ab5c07116176473869ff106cfb67c40f26cde9,leomurta,showing function calls
+18663bde1bcbd1bfc5dd5ebf2682448071f2e2d7,leomurta,showing environment attributes
+5a4fb897fcd2b8bdb16ae72640793eb13f396dd2,leomurta,showing function defs
+d08ca8b95a88bbffd1417e53228c766ccba7870a,leomurta,showing modules
+08a2cbc2a32274488072619dffea04a13e8f24a8,leomurta,adding a resources directory
+43623513e058a60b395999deeaf666b1211ac4f1,leomurta,restructuring resources to tests
+35429efd5e0dfb89801c45b27c2859a54e7b9267,leomurta,restructuring tests to prototypes
+ff7b77efdfb1a829a3cab34aa764014723719378,leomurta,adding list command and using named access to query columns
+6cdcf2deaff22e54213e2be2f702d0027aa25a35,leomurta,"refactoring in progress to add subcommands run, show, and export. Run is working properly. Show is under way. Should add list subcomand to show all trials"
+d437cfec51d1dc6aba2babba0faa1de8eadd61fe,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+7b18b30ae34024557b50ff04a2a284242fee6406,leomurta,registering argument values for python functions
+8c50a3e2e8388b929fcb737d022d91f7bab48233,braganholo,More d3 examples using our function calls
+bfe98eba2a6759f74dea84b496669419ddd7ea50,braganholo,"Examples of chapter 9 of the book, with transitions and updates
+
+(very nice feature!)"
+595a3dde41a4bb1c5ef0975d7252eca2cd932b70,braganholo,More tutorial examples of D3
+6aa85b981de8adc9f2bd38ae6de80ed1d628cfad,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+56016ce289eed57cb65960adf47abf25b6962135,leomurta,Hint on how to capture arguments and globals
+454123dbb983b8d6a8df9a0207f44fe66a6ed219,braganholo,"D3 tutorial examples
+
+Including svg examples."
+1aac03c17ec12b98cbc1e4de8b616a463e826725,braganholo,Initial d3 tests
+63531890001a85c83c02bd633f2d788a04bd24a5,leomurta,Fixing the column callee_id to caller_id
+0d0e5c051c0e04f3f966028c17f2ec06e2c2a982,leomurta,printing function calls and file accesses
+f8ae981067d31d5adc09778f4d6d768c77c77f27,leomurta,finished the storing support for retrospective data
+f92ac6711c03421452a89c0b21ff14db63991443,leomurta,Fixed the exception when a file is being written for the first time.
+20c413babb4e990543a3f5eaf0c7f6c094e84a48,leomurta,Storing all prospective data in the SQLite Database. We are replicating information for each run.
+872f8a843f1dbb6c021ddb2169f973b6da41f641,braganholo,Changes to the SQL script
+7c552ddecfed8b05241c4805f8ce3291841ea8a6,leomurta,Adding RDBMS persistence
+27ae3ffbd7a0460820efe1cdd0a957cd92dcda05,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+e4ac2e9a2553bad1d7481512db7cde7ad1beaa99,leomurta,using a stack for tracing calls and capturing file acess
+de318584cbbf51e6e1e09cb89be3066aacd503a9,braganholo,Added SQL script
+355474ac591d0e6ee33c8e5482a1136b968b203a,leomurta,Using settrace to capture calls
+9a46207904096dc66ed2a7895e2efcefe25bf7cc,braganholo,Changed variable names to comprise with Python guidelines
+f4e61300bcccdd5cdc1fce991b235375f3510145,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+b1b585a9d8ddf734968c52e60ad2f8ab1e23bf81,leomurta,Collecting function hash and some function calls from AST.
+2f18bedd7bc3c416c95706fcc022dde15382cf96,braganholo,Saves simulation result into a file
+6965d56ccaf67106184aff9d2fcee7110d635e91,leomurta,"Restructuring the project to differentiate test scripts (used to test
+ideas) from resource scripts (used as input data)."
+7c809fa35dd54a47b387b3cc564975744bf0d0d4,leomurta,"Collecting functions, arguments and globals."
+1a125c6b4a44ffaf74c703a2fbde9d5627ea4b10,braganholo,"Merge branch 'master' of https://github.com/gems-uff/noworkflow
+
+Conflicts:
+	test/weather/simulation_for_paper.py"
+bed64a98cb3414dcc7085d8eb7901dbbac5b05b3,braganholo,Applied pep8
+84c5e4df832b30a0d3cbd14453105823a9cdc4ee,leomurta,Collecting environment information and showing to the user.
+b104aa61eac66fbc4928ac30b00532e771951082,braganholo,Refactor of db-sample to obey Python naming conventions
+16ea0e376bec5e4ad26976ffde4179de23393cb6,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow.git
+a5edf3b3010c5de7f4c0649732765cd7560eb94d,leomurta,"Module dependency extraction working. We opted to use modulefinder in
+place of snakefood as it is a standard library module."
+f9435075e1d28d73826eaa03782f1fdaaf508449,braganholo,Fixed error in the sample DB application
+ee45227d76c355d5de3dbcf0c54d53a9624142e6,leomurta,"Adding some profile examples and coding some initial file system store,
+together with running output in verbose mode."
+86d893dd2aebcda5627a401b7be0a48ce4440479,leomurta,Almost finished the use of setuptools and argparser
+522f4b4579df56c8fcc4ab6350812837bc477d7c,leomurta,Collecting more metatada information.
+ab8d1b780fb2c0e17b53e28e460d3df5c750d0e1,braganholo,"Changed name of input file, created simulation script for paper"
+e7a00734ed69d581498e1476a007a4d6bef6aaa0,braganholo,"Moved weather example to \test, created sqlite3 example
+
+The insert statement of the example is not working… (to be fixed)"
+7662fd4b7f27da6c8a95c9a7659c40abe9bf7688,braganholo,Refinements to run simulation faster
+f8b9a7be07e1013e37788aab80e16c25b57d8e47,leomurta,"Adding module dependency analysis using snakefood and metadata
+gathering."
+c3e1ada9f6e938eec1651bda7a96afab7d404555,leomurta,Some tests using inspect to get code information.
+3f9cb4ba7efa9fd45b42b1b16be01f5dc85150d1,leomurta,"Some progress on using AST for collecting prospective provenance. We
+still need to bridge to code using inspect."
+0168ef56e561a334b8a6faa5b1310af7c57ae508,leomurta,Adding specification of how prospective provenance can be stored.
+1fe5a381f4719a7b72d02ac143366171a4a33a12,leomurta,Adding supporting info doc.
+dd86c487e1f06743160022ed0e0797d15811e62a,leomurta,Change the order of checking the version of a module.
+5e66305ae001bf016ccc8696bcb7a6964667e501,leomurta,"Changing the way to get hash from a module and adding another example
+(modulefinder)"
+63dcb81b97c2cd51f74afb0ebb3b93907c98fd29,leomurta,Some initial explorations regarding extracting byte code and recurring over function calls.
+48add13a252927422b86f7173fa91d2cd4440367,braganholo,Result generation complete
+5a13ee45189ba2daa6dd463a3f2033baaff7e859,leomurta,Merge branch 'master' of https://github.com/gems-uff/noworkflow
+4a0e72f98ebb25a925987552431e0d9c5d109d78,leomurta,Using Canopy.
+9aeed2578ec5a74904added7399be9dafafd6486,braganholo,"Generate result of the simulation
+
+still to be printed correctly"
+e57ee869333db67e92462a82af219e5104313199,leomurta,Adding some TODOs.
+d7feef741a994f3b73c6844a910af9ca78e5115f,braganholo,"Added prints to trace execution, and included input data"
+eb1e8704b42c05745761cedb67584122ad3c98da,leomurta,Adding initial support for detecting file reading.
+1a896a3be5708a2d8076202735eee2e310ce2447,braganholo,"Example script
+
+Translation from the VisTrails workflow weather-persistent.vt to a
+python script -- results display still to be done"
+7365d3734b97df6c44b0ee8be0aadebd9d2a482f,leomurta,Keeping the name in lower case and together
+e1e67f40a29da57518db1f458668984c3e1f9e8d,leomurta,Adding some prototype scripts
+920015701f79b1217ed3e76088d83039dc20553c,leomurta,Adding initial files.
+ac9f406bb0af84fbde651bea99552c090e48299a,leomurta,Initial commit

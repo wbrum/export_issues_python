@@ -1,28 +1,4 @@
 id,title,body,state,creator,labels,created_at,updated_at,closed_at,assignee
-107,Export Database and Prolog Schema graphs,,open,JoaoFelipe,[enhancement],2016-03-23 05:11:36+00:00,2016-03-23 05:59:49+00:00,,
-106,Link definition provenance to execution provenance,"Currently, there is no link between function_def and activation; and between object and object_value.
-
-We should create links to support queries such as:
-- what is the docstring of a given activation?
-- is a given variable a function variable or a global one.
-",open,JoaoFelipe,[enhancement],2016-03-21 14:05:34+00:00,2016-03-23 05:10:57+00:00,,
-105,Uniformize path,"When we capture a script, module, or file access inside the project directory (identified by either --dir, which defaults to CWD), we should capture it with a relative path. Other files should be captured with their absolute paths.",open,JoaoFelipe,[enhancement],2016-03-21 13:57:20+00:00,2016-03-23 05:10:47+00:00,,
-104,Store and export command line,"Instead of storing a string with the command line, we should be able to store each part individually e export it to prolog.
-
-Maybe it is better to store --dir in the trial table itself, since it is common to check if a file belongs to the trial directory.
-
-It is probably better to implement it after #54 to avoid rework. 
- ",open,JoaoFelipe,[enhancement],2016-03-21 13:49:54+00:00,2016-03-23 05:10:41+00:00,,
-103,Prolog enhancements,"1- Use atoms to represent strings by using 'single quotes'. If the string starts with a quote, remove it.
-
-2- Use underscores for predicates and CamelCase for variable descriptions
-
-3- Use ActivationId instead of FunctionActivationId
-
-
-",closed,JoaoFelipe,[enhancement],2016-03-21 13:40:05+00:00,2016-03-23 06:33:45+00:00,2016-03-23 06:33:45+00:00,
-102,Export all trial data to prolog,Export everything from the relational database to prolog,open,JoaoFelipe,[enhancement],2016-03-19 03:59:19+00:00,2016-03-21 18:17:54+00:00,,
-101,Collect Docstrings,"Collect docstrings, and export function definitions to prolog",closed,JoaoFelipe,[enhancement],2016-03-19 03:26:55+00:00,2016-03-23 06:33:53+00:00,2016-03-23 06:33:53+00:00,
 100,Add option show only data or functions in dataflow command,,open,JoaoFelipe,[enhancement],2016-02-29 16:46:24+00:00,2016-03-01 04:37:11+00:00,,
 99,Pack the content DB,"We are currently using a basic mechanism for storing content of files, as described here (http://schacon.github.io/gitbook/7_how_git_stores_objects.html). This is nice because we do not duplicate content in the database, but after any small change in the file the entire new content is stored. An alternative is to adopt some strategy to pack the content, like this (http://schacon.github.io/gitbook/7_the_packfile.html).",open,leomurta,[enhancement],2016-02-28 22:04:52+00:00,2016-02-29 14:34:37+00:00,,JoaoFelipe
 98,Combine Augmented Assign nodes,"Example:
@@ -39,7 +15,7 @@ We should have a option to combine both ""x"" nodes
 ",open,JoaoFelipe,[enhancement],2016-02-28 16:13:43+00:00,2016-02-28 16:13:43+00:00,,
 97,Add option to combine variables and file accesses in dataflow,,open,JoaoFelipe,[enhancement],2016-02-28 05:37:48+00:00,2016-02-28 16:11:01+00:00,,
 96,"Hide ""internal use"" functions in dataflow graph","According to PEP 8, ""internal use"" functions can be identified by leading underscores:
-",closed,JoaoFelipe,[enhancement],2016-02-28 05:36:01+00:00,2016-03-23 06:46:14+00:00,2016-03-23 06:46:14+00:00,
+",open,JoaoFelipe,[enhancement],2016-02-28 05:36:01+00:00,2016-02-28 05:36:49+00:00,,
 95,Prospective dataflow graph,,open,JoaoFelipe,[enhancement],2016-02-26 20:09:43+00:00,2016-02-26 20:09:43+00:00,,
 94,Collection of loop and conditional dependencies,"Two bugs:
 1- Updates to variable names create wrong dependencies:
