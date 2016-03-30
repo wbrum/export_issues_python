@@ -3,7 +3,7 @@ import csv
 import github3
 
 git_username = 'wbrum'
-git_api_token = '1d031b21a0a9cd15803ef7f7b32e3627d0f666e1'
+git_api_token = '0ca9fb9a09e516190d0e6375b814bf20873c4378'
 git_repo = 'https://github.com/gems-uff/noworkflow'
 
 # csv name
@@ -21,13 +21,14 @@ def run_csv():
         'sha',
         'author',
         'message',
+        'date',
 
     ]
 
     # escreve header rows
     output_csv.writerow(headers)
 
-    # baixa issues e transcreve para csv
+    # baixa commits e transcreve para csv
     git_commits = github.repository("gems-uff", "noworkflow").iter_commits()
     for git_commit in git_commits:
         print git_commit.commit.message
@@ -35,6 +36,7 @@ def run_csv():
             git_commit.sha,
             git_commit.author,
             git_commit.commit.message.encode('utf8'),
+            git_commit.commit.author['date'],
 
         ]
         output_csv.writerow(commit)
